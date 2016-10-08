@@ -3,24 +3,26 @@ var pictures = pictureDiv.getElementsByTagName("img")
 var coordsDiv = document.getElementById("coords")
 var coords = coordsDiv.getElementsByTagName("p1")
 var pic, width, height, ratio, depthExtra, rotation
-items = []
-strCoords = [[],[],[]]
-intCoords = [[],[],[]]
+var items = []
+var strCoords = []
+var intCoords = []
+var floaties = []
 for (i = 0; i < coords.length; i++)
 {
 	items[i] = coords[i].innerHTML
-	strCoords[i] = items[i].split(" ")
+	strCoords.push(items[i].split(" "))
 	for (j = 0; j < strCoords[i].length; j++)
 	{
-		intCoords[i][j] = parseFloat(strCoords[i][j])
+        floaties.push(parseFloat(strCoords[i][j]))
+		intCoords.push(floaties)
 	}
+
 }
-//placeholder array for the current number of pictures, will be loaded later
 for (i = 0; i < pictures.length; i++)
 {
-	window.alert(intCoords[i][0])
-	window.alert(intCoords[i][1])
-	window.alert(intCoords[i][2])
+	//window.alert(intCoords[i][0])
+	//window.alert(intCoords[i][1])
+	//window.alert(intCoords[i][2])
 	pic = pictures[i]
 	width = pic.width
     height = pic.height
@@ -35,6 +37,7 @@ for (i = 0; i < pictures.length; i++)
       width = 1
       height = 1/ratio
     }
+    
     if (intCoords[i][2] == -1.9)
     {
         rotation = 0
@@ -55,7 +58,6 @@ for (i = 0; i < pictures.length; i++)
         rotation = 270
         depthExtra = intCoords[i][0]-.01
     }
-		window.alert(rotation)
 
     document.write('<a-image src="#'+pic.id+'" position="'+intCoords[i][0]+' '+intCoords[i][1]+' '+intCoords[i][2]+'" rotation="0 '+rotation+' 0" width="' + width + '" height="' + height + '"></a-image>')
     width += .1
