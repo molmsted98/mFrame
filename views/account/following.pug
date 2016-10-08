@@ -4,4 +4,5 @@ block content
   hr
   .row
     each follow in following
-      h1= follow.profile.name
+      h1
+      a(href='/userProfile/' + follow._id)= follow.profile.name
