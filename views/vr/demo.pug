@@ -22,10 +22,11 @@ html
     a-scene
       a-assets
         img(id='walltext', src='/images/wallstexture.png')
-        img(id='vp1', src='/images/vp1.jpg')
-        img(id='vp2', src='/images/vp2.jpg')
-        img(id='stars', src='/images/stars.jpg')
-        img(id='me', src='/images/me.png')
+        div(id='pictures')
+          img(id='vp1', src='/images/vp1.jpg')
+          img(id='vp2', src='/images/vp2.jpg')
+          img(id='stars', src='/images/stars.jpg')
+          img(id='me', src='/images/me.png')
       a-image(src='#walltext', position='0 1 0', rotation='90 0 0', width='4', height='4')
       a-image(src='#walltext', position='0 3 2', rotation='0 0 0', width='4', height='4')
       a-image(src='#walltext', position='0 3 -2', rotation='0 0 0', width='4', height='4')
@@ -33,25 +34,7 @@ html
       a-image(src='#walltext', position='-2 3 0', rotation='0 90 0', width='4', height='4')
       a-image(src='#walltext', position='0 5 0', rotation='90 0 0', width='4', height='4')
       
-      script.
-        var img = document.getElementById("me")
-        var width = img.width
-        var height = img.height
-        var ratio = width/height
-        if (height < width)
-        {
-          height = 1
-          width = ratio
-        }
-        else
-        {
-          width = 1
-          height = 1/ratio
-        }
-        document.write('<a-image src="#me" position="0 3 -1.9" rotation="0 0 0" width="' + width + '" height="' + height + '"></a-image>')
-        width += .1
-        height += .1
-        document.write('<a-image color="black" position="0 3 -1.91" rotation="0 0 0" width="' + width + '" height="' + height + '"></a-image>')
+      script(src='/js/pictureHanger.js')
 
       
       a-sky(color='#ECECEC')
