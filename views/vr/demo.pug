@@ -28,6 +28,17 @@ html
           each coord in coords
             p1= coord
       
+      a-camera
+        a-cursor(fuse='true' color='teal' fuseTimeout='500')
+
+      a-image(id='followButton' color='black' position='0 4.9 0' rotation='90 0 0')
+
+      script.
+        document.querySelector('#followButton').addEventListener('click', function() 
+        {
+          window.alert('ahhah')
+        })
+
       a-image(src='#walltext', position='0 1 0', rotation='90 0 0', width='3.99', height='3.99')
       a-image(src='#walltext', position='0 3 2', rotation='0 0 0', width='3.99', height='3.99')
       a-image(src='#walltext', position='0 3 -2', rotation='0 0 0', width='3.99', height='3.99')
