@@ -6,17 +6,17 @@ var pic, width, height, ratio, depthExtra, rotation
 var items = []
 var strCoords = []
 var intCoords = []
-var floaties = []
+var coordIndiv = []
 for (i = 0; i < coords.length; i++)
 {
 	items[i] = coords[i].innerHTML
 	strCoords.push(items[i].split(" "))
+    coordIndiv = []
 	for (j = 0; j < strCoords[i].length; j++)
 	{
-        floaties.push(parseFloat(strCoords[i][j]))
-		intCoords.push(floaties)
+        coordIndiv.push(parseFloat(strCoords[i][j]))
 	}
-
+    intCoords.push(coordIndiv)
 }
 for (i = 0; i < pictures.length; i++)
 {
