@@ -34,6 +34,7 @@ const userController = require('./controllers/user');
 const apiController = require('./controllers/api');
 const contactController = require('./controllers/contact');
 const demoController = require('./controllers/demo');
+const uploadController = require('./controllers/upload');
 
 /**
  * API keys and Passport configuration.
@@ -86,6 +87,10 @@ app.use(session({
 app.use(passport.initialize());
 app.use(passport.session());
 app.use(flash());
+
+//This is here because MultiPart doesn't work with CSRF
+app.post('/upload', passportConfig.isAuthenticated, upload.single('myFile'), uploadController.postUpload);
+
 app.use((req, res, next) => {
   if (req.path === '/api/upload') {
     next();
@@ -133,6 +138,7 @@ app.post('/account/password', passportConfig.isAuthenticated, userController.pos
 app.post('/account/delete', passportConfig.isAuthenticated, userController.postDeleteAccount);
 app.get('/account/unlink/:provider', passportConfig.isAuthenticated, userController.getOauthUnlink);
 app.get('/demo', demoController.index);
+app.get('/upload', uploadController.index);
 
 /**
  * API examples routes.

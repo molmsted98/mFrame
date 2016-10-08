@@ -23,6 +23,9 @@ public/css/main.css
 node_modules
 bower_components
 
+# Image uploads
+uploads
+
 # Editors
 .idea
 *.iml
