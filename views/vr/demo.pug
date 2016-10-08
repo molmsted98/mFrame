@@ -17,24 +17,34 @@ html
     script(src='/js/main.js')
     script(src='/js/lib/aframe.min.js')
 
-
     a-scene
       a-assets
-        img(id='walltext', src='/images/aestexture.png')
+        if wall
+          img(id='walltexture', src='/uploads/' + wall.fileName)
+        else
+          img(id='walltexture', src='/images/wallstexture.png')
+        if ceiling
+          img(id='ceilingtexture', src='/uploads/' + ceiling.fileName)
+        else
+          img(id='ceilingtexture', src='/images/wallstexture.png')
+        if floor
+          img(id='floortexture', src='/uploads/' + floor.fileName)
+        else
+          img(id='floortexture', src='/images/wallstexture.png')
         div(id='pictures')
           each path, index in paths
             img(id='a' + index, src='/uploads/' + path)
         div(id='coords')
           each coord in coords
             p1= coord
-      
-      a-image(src='#walltext', position='0 1 0', rotation='90 0 0', width='3.99', height='3.99')
-      a-image(src='#walltext', position='0 3 2', rotation='0 0 0', width='3.99', height='3.99')
-      a-image(src='#walltext', position='0 3 -2', rotation='0 0 0', width='3.99', height='3.99')
-      a-image(src='#walltext', position='2 3 0', rotation='0 90 0', width='3.99', height='3.99')
-      a-image(src='#walltext', position='-2 3 0', rotation='0 90 0', width='3.99', height='3.99')
-      a-image(src='#walltext', position='0 5 0', rotation='90 0 0', width='3.99', height='3.99')
+
+      a-image(src='#floortexture', position='0 1 0', rotation='90 0 0', width='3.99', height='3.99')
+      a-image(src='#ceilingtexture', position='0 5 0', rotation='90 0 0', width='3.99', height='3.99')
+      a-image(src='#walltexture', position='2 3 0', rotation='0 90 0', width='3.99', height='3.99')
+      a-image(src='#walltexture', position='-2 3 0', rotation='0 90 0', width='3.99', height='3.99')
+      a-image(src='#walltexture', position='0 3 2', rotation='0 0 0', width='3.99', height='3.99')
+      a-image(src='#walltexture', position='0 3 -2', rotation='0 0 0', width='3.99', height='3.99')
 
       //a-sky(color='#777777')
 
-      script(src='/js/pictureHanger.js', data-coords=coords)
+      script(src='/js/pictureHanger.js')
