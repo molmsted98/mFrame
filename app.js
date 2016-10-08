@@ -138,7 +138,7 @@ app.post('/account/password', passportConfig.isAuthenticated, userController.pos
 app.post('/account/delete', passportConfig.isAuthenticated, userController.postDeleteAccount);
 app.get('/account/unlink/:provider', passportConfig.isAuthenticated, userController.getOauthUnlink);
 app.get('/demo', demoController.index);
-app.get('/upload', uploadController.index);
+app.get('/upload', passportConfig.isAuthenticated, uploadController.index);
 
 /**
  * API examples routes.
