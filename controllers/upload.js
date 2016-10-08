@@ -35,7 +35,7 @@ exports.styleIndex = (req, res) => {
  */
 exports.postUpload = (req, res, next) => {
   var numPo
-  
+
   if (req.body.type == "Post")
   {
     Post.find({id: req.user.id}).lean().exec((err, posts) =>
@@ -48,7 +48,7 @@ exports.postUpload = (req, res, next) => {
         fileName: req.file.filename,
         coordinates: positions[numPo]
       });
-      post.save((err) => 
+      post.save((err) =>
       {
         req.flash('failure', { msg: 'File was not uploaded successfully.' });
         return next(err);
@@ -59,6 +59,9 @@ exports.postUpload = (req, res, next) => {
   }
   else
   {
+    //Remove the existing style.
+    Style.find({ id:req.user.id, type: req.body.type }).remove().exec();
+
     const style = new Style(
     {
       id: req.user.id,
@@ -66,9 +69,9 @@ exports.postUpload = (req, res, next) => {
       type: req.body.type
     });
 
-    style.save((err) => 
+    style.save((err) =>
     {
-      if (err) 
+      if (err)
       {
         req.flash('failure', { msg: 'File was not uploaded successfully.' });
         return next(err);

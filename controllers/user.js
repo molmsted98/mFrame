@@ -4,6 +4,7 @@ const nodemailer = require('nodemailer');
 const passport = require('passport');
 const User = require('../models/User');
 const Post = require('../models/Post');
+const Style = require('../models/Style');
 const fs = require("fs");
 
 /**
@@ -387,24 +388,32 @@ exports.postForgot = (req, res, next) => {
 exports.getPosts = (req, res, next) => {
   const userId = req.params.userId;
 
-  Post.find({id: userId}).lean().exec((err, posts) => {
-    paths = [];
-    coords = [];
-    strCoords = [];
-    for (var i = 0; i < posts.length; i++) {
-      var object = posts[i];
-      paths.push(
-        object.fileName
-      );
-      coords.push(
-        object.coordinates
-      );
-    }
-    for (var i = 0; i < posts.length; i++) {
-      strCoords[i] = coords[i][0] + ' ' + coords[i][1] + ' ' + coords[i][2]
-    }
-    console.log(strCoords);
-    res.render('vr/demo', {"paths": paths, "coords": strCoords})
+  Style.findOne({id: userId, type: "Floor"}).exec((err, floor) => {
+    Style.findOne({id: userId, type: "Wall"}).exec((err, wall) => {
+      Style.findOne({id: userId, type: "Ceiling"}).exec((err, ceiling) => {
+        Post.find({id: userId}).lean().exec((err, posts) => {
+          paths = [];
+          coords = [];
+          strCoords = [];
+          for (var i = 0; i < posts.length; i++) {
+            var object = posts[i];
+            paths.push(
+              object.fileName
+            );
+            coords.push(
+              object.coordinates
+            );
+          }
+          for (var i = 0; i < posts.length; i++) {
+            strCoords[i] = coords[i][0] + ' ' + coords[i][1] + ' ' + coords[i][2]
+          }
+          console.log(strCoords);
+          res.render('vr/demo',
+            {"paths": paths, "coords": strCoords, "floor": floor, "ceiling": ceiling, "wall": wall}
+          );
+        });
+      });
+    });
   });
 };
 
