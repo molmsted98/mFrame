@@ -27,15 +27,7 @@ html
         div(id='coords')
           each coord in coords
             p1= coord
-      <a-entity position="0 .6 4">
-        <a-camera>
-            <a-entity id="mycursor" cursor="fuse: true; fuseTimeout: 500; max-distance: 30;"
-            position="0 0 -5"
-            geometry="primitive: ring"
-            material="color: blue; shader: flat">
-            </a-entity>
-        </a-camera>
-      </a-entity>
+      
       a-image(src='#walltext', position='0 1 0', rotation='90 0 0', width='3.99', height='3.99')
       a-image(src='#walltext', position='0 3 2', rotation='0 0 0', width='3.99', height='3.99')
       a-image(src='#walltext', position='0 3 -2', rotation='0 0 0', width='3.99', height='3.99')
