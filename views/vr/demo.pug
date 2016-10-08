@@ -41,7 +41,7 @@ html
             p1= coord
 
       a-camera
-        a-cursor(fuse='true' color='teal' fuseTimeout='500')
+        a-cursor(fuse='true' color='teal' fuseTimeout='1000')
 
       a-image(id='followButton' color='black' position='0 4.9 0' rotation='90 0 0')
 
@@ -55,6 +55,8 @@ html
           window.location = str;
         })
 
+      
+
       a-image(src='#floortexture', position='0 1 0', rotation='90 0 0', width='3.99', height='3.99')
       a-image(src='#ceilingtexture', position='0 5 0', rotation='90 0 0', width='3.99', height='3.99')
       a-image(src='#walltexture', position='2 3 0', rotation='0 90 0', width='3.99', height='3.99')
@@ -65,3 +67,16 @@ html
       //a-sky(color='#777777')
 
       script(src='/js/pictureHanger.js')
+
+      script.
+        var pics = document.getElementsByClassName("a")
+
+        var myFunc = function()
+        {
+          this.emit('expand')
+        }
+
+        for (var i = 0; i < pics.length; i++) 
+        {
+          pics[i].addEventListener('click', myFunc)
+        }
