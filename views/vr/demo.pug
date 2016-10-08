@@ -34,19 +34,25 @@ html
         div(id='pictures')
           each path, index in paths
             img(id='a' + index, src='/uploads/' + path)
+        div(id='userIds')
+          p1= userId
         div(id='coords')
           each coord in coords
             p1= coord
-      
+
       a-camera
         a-cursor(fuse='true' color='teal' fuseTimeout='500')
 
       a-image(id='followButton' color='black' position='0 4.9 0' rotation='90 0 0')
 
       script.
-        document.querySelector('#followButton').addEventListener('click', function() 
+        document.querySelector('#followButton').addEventListener('click', function()
         {
-          window.alert('ahhah')
+          var idDiv = document.getElementById("userIds")
+          var id = idDiv.getElementsByTagName("p1")
+          var item = id[0].innerHTML
+          const str = 'followUser/' + item;
+          window.location = str;
         })
 
       a-image(src='#floortexture', position='0 1 0', rotation='90 0 0', width='3.99', height='3.99')

@@ -37,7 +37,7 @@ for (i = 0; i < pictures.length; i++)
       width = 1
       height = 1/ratio
     }
-    
+
     if (intCoords[i][2] == -1.9)
     {
         rotation = 0

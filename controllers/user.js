@@ -409,7 +409,7 @@ exports.getPosts = (req, res, next) => {
           }
           console.log(strCoords);
           res.render('vr/demo',
-            {"paths": paths, "coords": strCoords, "floor": floor, "ceiling": ceiling, "wall": wall}
+            {"paths": paths, "coords": strCoords, "floor": floor, "ceiling": ceiling, "wall": wall, "userId": userId}
           );
         });
       });

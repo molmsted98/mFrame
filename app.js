@@ -72,7 +72,7 @@ app.use(sass({
   dest: path.join(__dirname, 'public')
 }));
 app.use(logger('dev'));
-app.use(bodyParser.json());
+app.use(bodyParser.json({limit: '10mb'}));
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(expressValidator());
 app.use(session({
@@ -141,7 +141,7 @@ app.get('/demo', demoController.index);
 app.get('/upload', passportConfig.isAuthenticated, uploadController.index);
 app.get('/getPosts/:userId', userController.getPosts);
 app.get('/userProfile/:userId', userController.getProfile);
-app.get('/followUser/:userId', passportConfig.isAuthenticated, userController.followUser);
+app.get('getPosts/followUser/:userId', passportConfig.isAuthenticated, userController.followUser);
 app.get('/unfollowUser/:userId', passportConfig.isAuthenticated, userController.unfollowUser);
 app.get('/getFollowing', passportConfig.isAuthenticated, userController.getFollowing);
 
