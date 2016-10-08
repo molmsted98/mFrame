@@ -393,11 +393,13 @@ exports.getPosts = (req, res, next) => {
 
 exports.getProfile = (req, res, next) => {
   const id = req.params.userId;
+  const currentUser = req.user.id;
   User.findOne({_id: id}).exec((err, user) => {
     if(err){ return next(err); }
     res.render('account/publicProfile', {
       title: 'Profile',
-      "user": user
+      "user": user,
+      "currentUser": currentUser
     });
   });
 };
