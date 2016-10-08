@@ -381,13 +381,22 @@ exports.getPosts = (req, res, next) => {
 
   Post.find({id: userId}).lean().exec((err, posts) => {
     paths = [];
+    coords = [];
+    strCoords = [];
     for (var i = 0; i < posts.length; i++) {
       var object = posts[i];
       paths.push(
         object.fileName
       );
+      coords.push(
+        object.coordinates
+      );
     }
-    res.render('vr/demo', {"paths": paths})
+    for (var i = 0; i < posts.length; i++) {
+      strCoords[i] = coords[i][0] + ' ' + coords[i][1] + ' ' + coords[i][2]
+    }
+    console.log(strCoords);
+    res.render('vr/demo', {"paths": paths, "coords": strCoords})
   });
 };
 

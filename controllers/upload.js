@@ -17,7 +17,8 @@ exports.index = (req, res) => {
 exports.postUpload = (req, res, next) => {
   const post = new Post({
     id: req.user.id,
-    fileName: req.file.filename
+    fileName: req.file.filename,
+    coordinates: [1.9,4,0]
   });
 
   post.save((err) => {

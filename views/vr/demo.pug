@@ -22,6 +22,9 @@ html
         div(id='pictures')
           each path, index in paths
             img(id='a' + index, src='/uploads/' + path)
+        div(id='coords')
+          each coord in coords
+            p1= coord
       a-image(src='#walltext', position='0 1 0', rotation='90 0 0', width='4', height='4')
       a-image(src='#walltext', position='0 3 2', rotation='0 0 0', width='4', height='4')
       a-image(src='#walltext', position='0 3 -2', rotation='0 0 0', width='4', height='4')
@@ -29,4 +32,4 @@ html
       a-image(src='#walltext', position='-2 3 0', rotation='0 90 0', width='4', height='4')
       a-image(src='#walltext', position='0 5 0', rotation='90 0 0', width='4', height='4')
 
-      script(src='/js/pictureHanger.js')
+      script(src='/js/pictureHanger.js', data-coords=coords)

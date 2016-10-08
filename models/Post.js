@@ -6,6 +6,10 @@ const postSchema = new mongoose.Schema({
   coordinates: [Number]
 }, { timestamps: true });
 
+postSchema.methods.changeCoords = function (newCoords) {
+  this.coordinates = newCoords;
+}
+
 const Post = mongoose.model('Post', postSchema);
 
 module.exports = Post;
