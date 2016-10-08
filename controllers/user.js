@@ -394,11 +394,11 @@ exports.getPosts = (req, res, next) => {
 exports.getProfile = (req, res, next) => {
   const id = req.params.userId;
   const currentUser = req.user;
-  User.findOne({_id: id}).exec((err, user) => {
+  User.findOne({_id: id}).exec((err, auser) => {
     if(err){ return next(err); }
     res.render('account/publicProfile', {
       title: 'Profile',
-      "user": user,
+      "auser": auser,
       "currentUser": currentUser
     });
   });
