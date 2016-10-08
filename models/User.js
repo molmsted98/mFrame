@@ -23,7 +23,9 @@ const userSchema = new mongoose.Schema({
     location: String,
     website: String,
     picture: String
-  }
+  },
+
+  following: [String]
 }, { timestamps: true });
 
 /**
@@ -49,6 +51,15 @@ userSchema.methods.comparePassword = function (candidatePassword, cb) {
   bcrypt.compare(candidatePassword, this.password, (err, isMatch) => {
     cb(err, isMatch);
   });
+};
+
+/**
+  * Helper method for following new user.
+  */
+userSchema.methods.followUser = function (userId) {
+  const user = this;
+  user.following.push(userId);
+  user.save();
 };
 
 /**

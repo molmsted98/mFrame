@@ -1,0 +1,7 @@
+extends ../layout
+
+block content
+  hr
+  .row
+    each follow in following
+      h1= follow.profile.name

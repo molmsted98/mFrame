@@ -120,7 +120,7 @@ app.use(express.static(path.join(__dirname, 'public'), { maxAge: 31557600000 }))
 /**
  * Primary app routes.
  */
-app.get('/', homeController.index);
+app.get('/', homeController.getUsers);
 app.get('/login', userController.getLogin);
 app.post('/login', userController.postLogin);
 app.get('/logout', userController.logout);
@@ -140,6 +140,9 @@ app.get('/account/unlink/:provider', passportConfig.isAuthenticated, userControl
 app.get('/demo', demoController.index);
 app.get('/upload', passportConfig.isAuthenticated, uploadController.index);
 app.get('/getPosts/:userId', userController.getPosts);
+app.get('/userProfile/:userId', userController.getProfile);
+app.get('/followUser/:userId', passportConfig.isAuthenticated, userController.followUser);
+app.get('/getFollowing', passportConfig.isAuthenticated, userController.getFollowing);
 
 /**
  * API examples routes.

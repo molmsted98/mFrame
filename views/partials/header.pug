@@ -15,6 +15,8 @@
           a(href='/') Home
         li(class=(title == 'Upload') ? 'active' : undefined)
           a(href='/upload') Upload
+        li(class=(title == 'Following') ? 'active' : undefined)
+          a(href='/getFollowing') Following
       ul.nav.navbar-nav.navbar-right
         if !user
           li(class=(title == 'Login') ? 'active' : undefined)
@@ -27,10 +29,13 @@
               if user.profile.picture
                 img(src=user.profile.picture)
               else
-                img(src=user.gravatar(60))
+                img(src=user.gravatar())
               span= user.profile.name || user.email || user.id
               i.caret
             ul.dropdown-menu
+              li
+                a(href='/userProfile/' + user.id) My Profile
+              li.divider
               li
                 a(href='/account') My Account
               li.divider

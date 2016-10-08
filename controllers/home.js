@@ -1,9 +1,14 @@
+const User = require('../models/User');
 /**
  * GET /
  * Home page.
  */
-exports.index = (req, res) => {
-  res.render('home', {
-    title: 'Home'
+exports.getUsers = (req, res) => {
+  User.find().lean().exec((err, users) => {
+    console.log(users);
+    res.render('home', {
+      title: 'Home',
+      "users": users
+    });
   });
 };

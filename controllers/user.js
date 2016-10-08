@@ -390,3 +390,35 @@ exports.getPosts = (req, res, next) => {
     res.render('account/posts', {"paths": paths})
   });
 };
+
+exports.getProfile = (req, res, next) => {
+  const id = req.params.userId;
+  User.findOne({_id: id}).exec((err, user) => {
+    if(err){ return next(err); }
+    res.render('account/publicProfile', {
+      title: 'Profile',
+      "user": user
+    });
+  });
+};
+
+exports.followUser = (req, res, next) => {
+  User.findOne({_id: req.user.id}).exec((err, user) => {
+    console.log(user);
+    user.followUser(req.params.userId);
+  });
+  req.flash('success', { msg: 'User was followed successfully.' });
+  return res.redirect('/userProfile/' + req.params.userId);
+};
+
+exports.getFollowing = (req, res, next) => {
+  User.findOne({_id: req.user.id}).lean().exec((err, currentUser) => {
+    followingIds = currentUser.following;
+    User.find({_id: {$in: followingIds}}).exec((err, following) => {
+      res.render('account/following', {
+        title: 'Following',
+        "following": following
+      });
+    });
+  });
+};

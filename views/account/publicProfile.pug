@@ -1,0 +1,13 @@
+extends ../layout
+
+block content
+  h2= user.profile.name
+  p.lead= user.profile.location
+  if user.profile.picture
+    img(src=user.profile.picture)
+  else
+    img(src=user.gravatar())
+  div.container
+    a.btn.btn-default(href='/followUser/' + user._id, role='button') Follow User
+  div.container
+    a.btn.btn-default(href='/getPosts/' + user._id, role='button') Enter Room
