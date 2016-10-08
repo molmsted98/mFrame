@@ -387,7 +387,7 @@ exports.getPosts = (req, res, next) => {
         object.fileName
       );
     }
-    res.render('account/posts', {"paths": paths})
+    res.render('vr/demo', {"paths": paths})
   });
 };
 
