@@ -19,7 +19,7 @@ const expressValidator = require('express-validator');
 const expressStatusMonitor = require('express-status-monitor');
 const sass = require('node-sass-middleware');
 const multer = require('multer');
-const upload = multer({ dest: path.join(__dirname, 'uploads') });
+const upload = multer({ dest: path.join(__dirname, 'public/uploads') });
 
 /**
  * Load environment variables from .env file, where API keys and passwords are configured.
@@ -139,6 +139,7 @@ app.post('/account/delete', passportConfig.isAuthenticated, userController.postD
 app.get('/account/unlink/:provider', passportConfig.isAuthenticated, userController.getOauthUnlink);
 app.get('/demo', demoController.index);
 app.get('/upload', passportConfig.isAuthenticated, uploadController.index);
+app.get('/getPosts/:userId', userController.getPosts);
 
 /**
  * API examples routes.

@@ -3,6 +3,8 @@ const crypto = require('crypto');
 const nodemailer = require('nodemailer');
 const passport = require('passport');
 const User = require('../models/User');
+const Post = require('../models/Post');
+const fs = require("fs");
 
 /**
  * GET /login
@@ -371,5 +373,20 @@ exports.postForgot = (req, res, next) => {
   ], (err) => {
     if (err) { return next(err); }
     res.redirect('/forgot');
+  });
+};
+
+exports.getPosts = (req, res, next) => {
+  const userId = req.params.userId;
+
+  Post.find({id: userId}).lean().exec((err, posts) => {
+    paths = [];
+    for (var i = 0; i < posts.length; i++) {
+      var object = posts[i];
+      paths.push(
+        object.fileName
+      );
+    }
+    res.render('account/posts', {"paths": paths})
   });
 };
