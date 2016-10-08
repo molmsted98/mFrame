@@ -105,6 +105,7 @@ passport.use(new FacebookStrategy({
           user.email = profile._json.email;
           user.facebook = profile.id;
           user.tokens.push({ kind: 'facebook', accessToken });
+          user.username = user.email;
           user.profile.name = profile.name.givenName + ' ' + profile.name.familyName;
           user.profile.gender = profile._json.gender;
           user.profile.picture = `https://graph.facebook.com/${profile.id}/picture?type=large`;
@@ -276,6 +277,7 @@ passport.use(new GoogleStrategy({
           user.email = profile.emails[0].value;
           user.google = profile.id;
           user.tokens.push({ kind: 'google', accessToken });
+          user.username = user.email;
           user.profile.name = profile.displayName;
           user.profile.gender = profile._json.gender;
           user.profile.picture = profile._json.image.url;
@@ -394,6 +396,7 @@ passport.use(new InstagramStrategy({
       // to get on with the registration process. It can be changed later
       // to a valid e-mail address in Profile Management.
       user.email = `${profile.username}@instagram.com`;
+      user.username = user.email;
       user.profile.website = profile._json.data.website;
       user.profile.picture = profile._json.data.profile_picture;
       user.save((err) => {

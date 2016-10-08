@@ -6,6 +6,5 @@ block content
   hr
   .row
     each user in users
-      if (typeof(user.profile) !== 'undefined')
-        h1
-        a(href='/userProfile/' + user._id)= user.profile.name
+      h1
+      a(href='/userProfile/' + user._id)= '@' + user.username

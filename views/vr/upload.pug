@@ -4,12 +4,13 @@ block content
   .page-header
     h2
       i.fa.fa-upload
-      | File Upload
-  h3 File Upload Form
+      | Image Upload
+  h3 Image Upload Form
   .row
     .col-sm-6
       form(role='form', enctype='multipart/form-data', method='POST')
         .form-group
           label.control-label File Input
           input(type='file', name='myFile')
+          input(name='type')
         button.btn.btn-primary(type='submit') Submit

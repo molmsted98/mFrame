@@ -6,7 +6,8 @@ html
     meta(name='viewport', content='width=device-width, initial-scale=1.0')
     meta(name='theme-color' content='#4DA5F4')
     meta(name='csrf-token', content=_csrf)
-    title #{title} - Hackathon Starter
+    //We want to put in the user's id here.
+    title #{title} - mFrame
     link(rel='shortcut icon', href='/favicon.png')
     link(rel='stylesheet', href='/css/main.css')
 
@@ -19,18 +20,29 @@ html
 
     a-scene
       a-assets
-        img(id='walltext', src='/images/wallstexture.png')
+        img(id='walltext', src='/images/aestexture.png')
         div(id='pictures')
           each path, index in paths
             img(id='a' + index, src='/uploads/' + path)
         div(id='coords')
           each coord in coords
             p1= coord
-      a-image(src='#walltext', position='0 1 0', rotation='90 0 0', width='4', height='4')
-      a-image(src='#walltext', position='0 3 2', rotation='0 0 0', width='4', height='4')
-      a-image(src='#walltext', position='0 3 -2', rotation='0 0 0', width='4', height='4')
-      a-image(src='#walltext', position='2 3 0', rotation='0 90 0', width='4', height='4')
-      a-image(src='#walltext', position='-2 3 0', rotation='0 90 0', width='4', height='4')
-      a-image(src='#walltext', position='0 5 0', rotation='90 0 0', width='4', height='4')
+      <a-entity position="0 .6 4">
+        <a-camera>
+            <a-entity id="mycursor" cursor="fuse: true; fuseTimeout: 500; max-distance: 30;"
+            position="0 0 -5"
+            geometry="primitive: ring"
+            material="color: blue; shader: flat">
+            </a-entity>
+        </a-camera>
+      </a-entity>
+      a-image(src='#walltext', position='0 1 0', rotation='90 0 0', width='3.99', height='3.99')
+      a-image(src='#walltext', position='0 3 2', rotation='0 0 0', width='3.99', height='3.99')
+      a-image(src='#walltext', position='0 3 -2', rotation='0 0 0', width='3.99', height='3.99')
+      a-image(src='#walltext', position='2 3 0', rotation='0 90 0', width='3.99', height='3.99')
+      a-image(src='#walltext', position='-2 3 0', rotation='0 90 0', width='3.99', height='3.99')
+      a-image(src='#walltext', position='0 5 0', rotation='90 0 0', width='3.99', height='3.99')
+
+      //a-sky(color='#777777')
 
       script(src='/js/pictureHanger.js', data-coords=coords)

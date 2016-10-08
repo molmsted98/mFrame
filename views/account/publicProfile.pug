@@ -1,7 +1,8 @@
 extends ../layout
 
 block content
-  h2= auser.profile.name
+  h1= '@' + auser.username
+  p.lead= auser.profile.name
   p.lead= auser.profile.location
   if user.profile.picture
     img(src=auser.profile.picture)
