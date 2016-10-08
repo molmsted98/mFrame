@@ -4,6 +4,7 @@ const mongoose = require('mongoose');
 
 const userSchema = new mongoose.Schema({
   email: { type: String, unique: true },
+  username: { type: String, unique: true},
   password: String,
   passwordResetToken: String,
   passwordResetExpires: Date,
@@ -60,6 +61,14 @@ userSchema.methods.followUser = function (userId) {
   const user = this;
   user.following.push(userId);
   user.save();
+};
+
+/**
+  * Helper method to add username.
+  */
+userSchema.methods.addUsername = function (username) {
+  this.username = username;
+  this.save();
 };
 
 /**
