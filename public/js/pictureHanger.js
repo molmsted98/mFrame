@@ -3,7 +3,7 @@ var pictures = pictureDiv.getElementsByTagName("img")
 var pic, width, height, ratio, depthExtra
 //placeholder array for the current number of pictures, will be loaded later
 var items = [
-	[0,3,-1.9],
+	[0,2,-1.9],
 	[1,2,1.9],
 	[-1,2,1.9],
 	[1,4,-1.9]
