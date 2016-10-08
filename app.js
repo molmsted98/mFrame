@@ -142,6 +142,7 @@ app.get('/upload', passportConfig.isAuthenticated, uploadController.index);
 app.get('/getPosts/:userId', userController.getPosts);
 app.get('/userProfile/:userId', userController.getProfile);
 app.get('/followUser/:userId', passportConfig.isAuthenticated, userController.followUser);
+app.get('/unfollowUser/:userId', passportConfig.isAuthenticated, userController.unfollowUser);
 app.get('/getFollowing', passportConfig.isAuthenticated, userController.getFollowing);
 
 /**

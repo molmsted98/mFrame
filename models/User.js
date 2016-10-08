@@ -63,6 +63,15 @@ userSchema.methods.followUser = function (userId) {
 };
 
 /**
+  * Helper method for unfollowing existing user.
+  */
+userSchema.methods.unfollowUser = function (userId) {
+  const user = this;
+  user.following.remove(userId);
+  user.save();
+}
+
+/**
  * Helper method for getting user's gravatar.
  */
 userSchema.methods.gravatar = function () {

@@ -8,7 +8,10 @@ block content
   else
     img(src=user.gravatar())
   div.container
-    if currentUser != user.id
-      a.btn.btn-default(href='/followUser/' + user._id, role='button') Follow User
+    if currentUser.id != user.id
+      if currentUser.following.indexOf(user.id) > -1
+        a.btn.btn-default(href='/unfollowUser/' + user._id, role='button') Unfollow User
+      else
+        a.btn.btn-default(href='/followUser/' + user._id, role='button') Follow User
   div.container
     a.btn.btn-default(href='/getPosts/' + user._id, role='button') Enter Room

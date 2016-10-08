@@ -393,7 +393,7 @@ exports.getPosts = (req, res, next) => {
 
 exports.getProfile = (req, res, next) => {
   const id = req.params.userId;
-  const currentUser = req.user.id;
+  const currentUser = req.user;
   User.findOne({_id: id}).exec((err, user) => {
     if(err){ return next(err); }
     res.render('account/publicProfile', {
@@ -410,6 +410,14 @@ exports.followUser = (req, res, next) => {
     user.followUser(req.params.userId);
   });
   req.flash('success', { msg: 'User was followed successfully.' });
+  return res.redirect('/userProfile/' + req.params.userId);
+};
+
+exports.unfollowUser = (req, res, next) => {
+  User.findOne({_id: req.user.id}).exec((err, user) => {
+    user.unfollowUser(req.params.userId);
+  });
+  req.flash('success', {msg: 'User was unfollowed successfully.'});
   return res.redirect('/userProfile/' + req.params.userId);
 };
 
