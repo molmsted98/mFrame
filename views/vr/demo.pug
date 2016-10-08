@@ -10,22 +10,48 @@ html
     link(rel='shortcut icon', href='/favicon.png')
     link(rel='stylesheet', href='/css/main.css')
 
+
   body
     script(src='/js/lib/jquery-2.2.4.min.js')
     script(src='/js/lib/bootstrap.min.js')
     script(src='/js/main.js')
     script(src='/js/lib/aframe.min.js')
 
+    
+
     a-scene
       a-assets
-        img(id='texture', src='/images/face.jpg')
-        img(id='text', src='images/images.jpeg')
-        img(id='a1', src='/images/1.jpg')
-        img(id='a2', src='/images/2.jpg')
-        img(id='a3', src='/images/3.jpg')
-        img(id='a4', src='/images/4.jpg')
-        img(id='a5', src='/images/5.jpg')
-        img(id='a6', src='/images/6.jpg')
-      a-image(src='#a1', position='0 1 0', rotation='90 0 0', width='4', height='4')
-      a-image(src='#a2', position='0 3 2', rotation='0 0 0', width='4', height='4')
+        img(id='walltext', src='/images/wallstexture.png')
+        img(id='vp1', src='/images/vp1.jpg')
+        img(id='vp2', src='/images/vp2.jpg')
+        img(id='stars', src='/images/stars.jpg')
+        img(id='me', src='/images/me.png')
+      a-image(src='#walltext', position='0 1 0', rotation='90 0 0', width='4', height='4')
+      a-image(src='#walltext', position='0 3 2', rotation='0 0 0', width='4', height='4')
+      a-image(src='#walltext', position='0 3 -2', rotation='0 0 0', width='4', height='4')
+      a-image(src='#walltext', position='2 3 0', rotation='0 90 0', width='4', height='4')
+      a-image(src='#walltext', position='-2 3 0', rotation='0 90 0', width='4', height='4')
+      a-image(src='#walltext', position='0 5 0', rotation='90 0 0', width='4', height='4')
+      
+      script.
+        var img = document.getElementById("me")
+        var width = img.width
+        var height = img.height
+        var ratio = width/height
+        if (height < width)
+        {
+          height = 1
+          width = ratio
+        }
+        else
+        {
+          width = 1
+          height = 1/ratio
+        }
+        document.write('<a-image src="#me" position="0 3 -1.9" rotation="0 0 0" width="' + width + '" height="' + height + '"></a-image>')
+        width += .1
+        height += .1
+        document.write('<a-image color="black" position="0 3 -1.91" rotation="0 0 0" width="' + width + '" height="' + height + '"></a-image>')
+
+      
       a-sky(color='#ECECEC')
