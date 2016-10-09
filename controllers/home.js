@@ -9,8 +9,7 @@ exports.getUsers = (req, res) => {
     User.find({username: new RegExp(req.body.search, "i")}).lean().exec((err, users) => {
       res.render('home', {
         title: 'Home',
-        "users": users,
-        "users2": users2
+        "users": users
       });
     });
   }

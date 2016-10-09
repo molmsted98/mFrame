@@ -17,6 +17,8 @@
         else
           li(class=(title == 'Follow @' + title))
             a(href='/followUser/' + userId) Follow #{title}
+        li(class=(title == 'Upload') ? 'active' : undefined)
+          a(href='/upload/') Upload
       ul.nav.navbar-nav.navbar-right
         if !user
           li(class=(title == 'Login') ? 'active' : undefined)

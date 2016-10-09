@@ -4,15 +4,10 @@ block content
   h1 mFrame: A VR Social Network
   p.lead Find a room to explore.
   form.form-horizontal(id='signup-form', method='POST')
-    input(type='text' name='search' placeholder='Something new')
+    input(type='text' name='search' placeholder='Search by username')
     hr
     .row
       if users
         each auser in users
           h1
           a(href='/getPosts/' + auser._id)= '@' + auser.username
-    .row
-      if users2
-        each buser in users2
-          h1
-          a(href='/getPosts/' + buser._id) = '@' + buser.username
