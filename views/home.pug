@@ -8,6 +8,6 @@ block content
     hr
     .row
       if users
-        each user in users
+        each auser in users
           h1
-          a(href='/getPosts/' + user._id)= '@' + user.username
+          a(href='/getPosts/' + auser._id)= '@' + auser.username
