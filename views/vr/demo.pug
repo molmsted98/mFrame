@@ -19,6 +19,8 @@ html
 
     a-scene
       a-assets
+        img(id='follow', src='/images/follow.png')
+        img(id='unfollow', src='/images/unfollow.png')
         if wall
           img(id='walltexture', src='/uploads/' + wall.fileName)
         else
@@ -43,19 +45,32 @@ html
       a-camera
         a-cursor(fuse='true' color='teal' fuseTimeout='1000')
 
-      a-image(id='followButton' color='black' position='0 4.9 0' rotation='90 0 0')
+      if show
+        if following
+          a-image(id='followButton' color='red' opacity='.1' position='0 4.9 0' rotation='90 0 0')
+          a-image(src='#unfollow' position='0 4.9 0' rotation='90 0 0')
+        else
+          a-image(id='followButton' color='green'  opacity='.1' position='0 4.9 0' rotation='90 0 0')
+          a-image(src='#follow' position='0 4.9 0' rotation='90 0 0')
 
       script.
         document.querySelector('#followButton').addEventListener('click', function()
         {
-          var idDiv = document.getElementById("userIds")
-          var id = idDiv.getElementsByTagName("p1")
-          var item = id[0].innerHTML
-          const str = 'followUser/' + item;
-          window.location = str;
-        })
+          //var idDiv = document.getElementById("userIds")
+          //var id = idDiv.getElementsByTagName("p1")
+          //var item = id[0].innerHTML
+          method = "post"; // Set method to post by default if not specified.
 
-      
+          var form = document.createElement("form");
+          form.setAttribute("method", method);
+          form.submit();
+
+          var image = document.getElementById("followButton")
+          image.color = 'red'
+
+          //const str = 'followUser/' + item;
+          //window.location = str;
+        })
 
       a-image(src='#floortexture', position='0 1 0', rotation='90 0 0', width='3.99', height='3.99')
       a-image(src='#ceilingtexture', position='0 5 0', rotation='90 0 0', width='3.99', height='3.99')
@@ -76,7 +91,7 @@ html
           this.emit('expand')
         }
 
-        for (var i = 0; i < pics.length; i++) 
+        for (var i = 0; i < pics.length; i++)
         {
           pics[i].addEventListener('click', myFunc)
         }
