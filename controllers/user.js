@@ -404,7 +404,7 @@ exports.getPosts = (req, res, next) => {
       {
         following = true;
       }
-      Style.findOne({id: userId, type: "Frame"}).exec((err, floor) => {
+      Style.findOne({id: userId, type: "Frame"}).exec((err, frame) => {
         Style.findOne({id: userId, type: "Floor"}).exec((err, floor) => {
           Style.findOne({id: userId, type: "Wall"}).exec((err, wall) => {
             Style.findOne({id: userId, type: "Ceiling"}).exec((err, ceiling) => {
