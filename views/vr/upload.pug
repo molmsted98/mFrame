@@ -1,3 +1,5 @@
+
+
 extends ../layout
 
 block content
@@ -8,14 +10,48 @@ block content
   h3 Image Upload Form
   .row
     .col-sm-6
+      script.
+        function check()
+        {
+          var type = document.getElementsByName("type")[0].value
+          if (type == 'Wall' || type == 'Ceiling' || type == 'Floor')
+          {
+            document.getElementById("warning").innerHTML="Warning: These images will be fit to squares. Images with large resolution ratios may not appear as you want them to.";
+          }
+          else if (type == 'Frame')
+          {
+            document.getElementById("warning").innerHTML="Only the edges of this image will be displayed, so solid colors/textures are advised.";
+          }
+          else
+          {
+            document.getElementById("warning").innerHTML="";
+          }
+          if (type == 'Wall' || type == 'Ceiling' || type == 'Floor' || type == 'Frame')
+          {
+            document.getElementById("warn2").innerHTML="If you have a previous version of this image, it will be overwritten.";
+          }
+          else
+          {
+            document.getElementById("warn2").innerHTML=""
+          }
+        }
       form(role='form', enctype='multipart/form-data', method='POST')
         .form-group
           label.control-label File Input
           input(type='file', name='myFile')
-          select(name='type')
+          select(name='type' onChange='check();')
             option(value='Post') Post
             option(value='Wall') Wall
             option(value='Ceiling') Ceiling
             option(value='Floor') Floor
             option(value='Frame') Frame
         button.btn.btn-primary(type='submit') Submit
+      p(id='warning')
+      p(id='warn2')
+      p(id='postWarn')
+      if (filenames.length >= 8)
+        p() Select an image to replace:
+      else
+        p() Current Posts:
+      each path, index in filenames
+        img(id='a' + index, src='/uploads/' + path, height='150' width='150' style={margin: '10px'})

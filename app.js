@@ -140,7 +140,7 @@ app.post('/account/password', passportConfig.isAuthenticated, userController.pos
 app.post('/account/delete', passportConfig.isAuthenticated, userController.postDeleteAccount);
 app.get('/account/unlink/:provider', passportConfig.isAuthenticated, userController.getOauthUnlink);
 app.get('/demo', demoController.index);
-app.get('/upload', passportConfig.isAuthenticated, uploadController.index);
+app.get('/upload', passportConfig.isAuthenticated, uploadController.getUploads);
 app.get('/getPosts/:userId', userController.getPosts);
 app.get('/userProfile/:userId', userController.getProfile);
 app.get('/followUser/:userId', passportConfig.isAuthenticated, userController.followUser);

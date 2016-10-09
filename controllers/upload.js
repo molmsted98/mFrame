@@ -29,6 +29,20 @@ exports.styleIndex = (req, res) => {
   });
 };
 
+exports.getUploads = (req, res, next) => 
+{
+  Post.find({id: req.user._id}).lean().exec((err, posts) => 
+  {
+    var filenames = [];
+    for (i = 0; i < posts.length; i++)
+    {
+      var object = posts[i];
+      filenames.push(object.fileName);
+    }
+    res.render('vr/upload', {"filenames":filenames});
+  });
+};
+
 /**
  * GET /
  * Success page.
