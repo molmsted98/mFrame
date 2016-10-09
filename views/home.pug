@@ -5,9 +5,15 @@ block content
   p.lead Find a room to explore.
   form.form-horizontal(id='signup-form', method='POST')
     input(type='text' name='search' placeholder='Search by username')
-    hr
-    .row
+    .row-lg-12.col-md-12
       if users
         each auser in users
           h1
           a(href='/getPosts/' + auser._id)= '@' + auser.username
+    br
+    hr
+    p.lead Recently created rooms
+    .row-lg-12.col-md-12
+      each buser in users2
+        h1
+        a(href='/getPosts/' + buser._id)= '@' + buser.username
