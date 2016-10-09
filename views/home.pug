@@ -3,5 +3,11 @@ extends layout
 block content
   h1 mFrame: A VR Social Network
   p.lead Find a room to explore.
-  hr
-  input(type='text' name='search' placeholder='Something new')
+  form.form-horizontal(id='signup-form', method='POST')
+    input(type='text' name='search' placeholder='Something new')
+    hr
+    .row
+      if users
+        each user in users
+          h1
+          a(href='/getPosts/' + user._id)= '@' + user.username
