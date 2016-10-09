@@ -12,5 +12,9 @@ block content
         .form-group
           label.control-label File Input
           input(type='file', name='myFile')
-          input(name='type')
+          select(name='type')
+            option(value='Post') Post
+            option(value='Wall') Wall
+            option(value='Ceiling') Ceiling
+            option(value='Floor') Floor
         button.btn.btn-primary(type='submit') Submit
