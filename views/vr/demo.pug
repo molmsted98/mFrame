@@ -11,13 +11,12 @@
         | mFrame
     .collapse.navbar-collapse
       ul.nav.navbar-nav
-        if show = true
-          if following
-            li(class=(title == 'Unfollow @' + title))
-              a(href='/unfollowUser/' + userId) Unfollow #{title}
-          else
-            li(class=(title == 'Follow @' + title))
-              a(href='/followUser/' + userId) Follow #{title}
+        if following
+          li(class=(title == 'Unfollow @' + title))
+            a(href='/unfollowUser/' + userId) Unfollow #{title}
+        else
+          li(class=(title == 'Follow @' + title))
+            a(href='/followUser/' + userId) Follow #{title}
       ul.nav.navbar-nav.navbar-right
         if !user
           li(class=(title == 'Login') ? 'active' : undefined)
