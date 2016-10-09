@@ -391,7 +391,7 @@ exports.getPosts = (req, res, next) => {
 
   var following = false;
   var show = true;
-  if (userId == req.user.id)
+  if (userId == req.user._id)
   {
     show = false;
   }
@@ -426,7 +426,7 @@ exports.getPosts = (req, res, next) => {
                 }
                 console.log(strCoords);
                 res.render('vr/demo',
-                  {"paths": paths, "coords": strCoords, "floor": floor, "ceiling": ceiling, "wall": wall, "frame": frame, "userId": userId, "following": following, "title": username}
+                  {"paths": paths, "coords": strCoords, "floor": floor, "ceiling": ceiling, "wall": wall, "frame": frame, "userId": userId, "following": following, "title": username, "show": show}
                 );
               });
             });
