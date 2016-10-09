@@ -1,3 +1,47 @@
+.navbar.navbar-default.navbar-fixed-top
+  .container
+    .navbar-header
+      button.navbar-toggle(type='button', data-toggle='collapse', data-target='.navbar-collapse')
+        span.sr-only Toggle navigation
+        span.icon-bar
+        span.icon-bar
+        span.icon-bar
+      a.navbar-brand(href='/')
+        i.fa.fa-cube
+        | SocialVR
+    .collapse.navbar-collapse
+      ul.nav.navbar-nav
+        if following
+          li(class=(title == 'Unfollow @' + title))
+            a(href='/unfollowUser/' + userId) Unfollow #{title}
+        else
+          li(class=(title == 'Follow @' + title))
+            a(href='/followUser/' + userId) Follow #{title}
+      ul.nav.navbar-nav.navbar-right
+        if !user
+          li(class=(title == 'Login') ? 'active' : undefined)
+            a(href='/login') Login
+          li(class=(title == 'Create Account') ? 'active' : undefined)
+            a(href='/signup') Create Account
+        else
+          li.dropdown(class=(title == 'Account Management') ? 'active' : undefined)
+            a.dropdown-toggle(href='#', data-toggle='dropdown')
+              if user.profile.picture
+                img(src=user.profile.picture)
+              else
+                img(src=user.gravatar())
+              span= user.profile.name || user.email || user.id
+              i.caret
+            ul.dropdown-menu
+              li
+                a(href='/getPosts/' + user.id) My Room
+              li.divider
+              li
+                a(href='/account') My Account
+              li.divider
+              li
+                a(href='/logout') Logout
+
 doctype html
 html
   head
@@ -19,8 +63,7 @@ html
 
     a-scene
       a-assets
-        img(id='follow', src='/images/follow.png')
-        img(id='unfollow', src='/images/unfollow.png')
+        img(id='exit', src='/images/exit.png')
         if wall
           img(id='walltexture', src='/uploads/' + wall.fileName)
         else
@@ -45,31 +88,12 @@ html
       a-camera
         a-cursor(fuse='true' color='teal' fuseTimeout='1000')
 
-      if show
-        if following
-          a-image(id='followButton' color='red' opacity='.1' position='0 4.9 0' rotation='90 0 0')
-          a-image(src='#unfollow' position='0 4.9 0' rotation='90 0 0')
-        else
-          a-image(id='followButton' color='green'  opacity='.1' position='0 4.9 0' rotation='90 0 0')
-          a-image(src='#follow' position='0 4.9 0' rotation='90 0 0')
+      a-image(id='exitBtn' src='#exit' position='0 4.9 0' transparent='true' rotation='90 0 0')
 
       script.
-        document.querySelector('#followButton').addEventListener('click', function()
+        document.querySelector('#exitBtn').addEventListener('click', function()
         {
-          //var idDiv = document.getElementById("userIds")
-          //var id = idDiv.getElementsByTagName("p1")
-          //var item = id[0].innerHTML
-          method = "post"; // Set method to post by default if not specified.
-
-          var form = document.createElement("form");
-          form.setAttribute("method", method);
-          form.submit();
-
-          var image = document.getElementById("followButton")
-          image.color = 'red'
-
-          //const str = 'followUser/' + item;
-          //window.location = str;
+          window.location = 'http://www.mfra.me';
         })
 
       a-image(src='#floortexture', position='0 1 0', rotation='90 0 0', width='3.99', height='3.99')

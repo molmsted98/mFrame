@@ -388,42 +388,45 @@ exports.postForgot = (req, res, next) => {
 exports.getPosts = (req, res, next) => {
   const userId = req.params.userId;
 
+  var following = false;
   var show = true;
   if (userId == req.user.id)
   {
     show = false;
   }
 
-  var following = false;
-  User.findOne({_id: req.user.id}).lean().exec((err, currentUser) => {
-    followingIds = currentUser.following;
-    if (followingIds.indexOf(userId) > -1)
-    {
-      following = true;
-    }
-    Style.findOne({id: userId, type: "Floor"}).exec((err, floor) => {
-      Style.findOne({id: userId, type: "Wall"}).exec((err, wall) => {
-        Style.findOne({id: userId, type: "Ceiling"}).exec((err, ceiling) => {
-          Post.find({id: userId}).lean().exec((err, posts) => {
-            paths = [];
-            coords = [];
-            strCoords = [];
-            for (var i = 0; i < posts.length; i++) {
-              var object = posts[i];
-              paths.push(
-                object.fileName
+  User.findOne({_id: userId}).lean().exec((err, targetUser) => {
+    var username = targetUser.username;
+    User.findOne({_id: req.user.id}).lean().exec((err, currentUser) => {
+      followingIds = currentUser.following;
+      if (followingIds.indexOf(userId) > -1)
+      {
+        following = true;
+      }
+      Style.findOne({id: userId, type: "Floor"}).exec((err, floor) => {
+        Style.findOne({id: userId, type: "Wall"}).exec((err, wall) => {
+          Style.findOne({id: userId, type: "Ceiling"}).exec((err, ceiling) => {
+            Post.find({id: userId}).lean().exec((err, posts) => {
+              paths = [];
+              coords = [];
+              strCoords = [];
+              for (var i = 0; i < posts.length; i++) {
+                var object = posts[i];
+                paths.push(
+                  object.fileName
+                );
+                coords.push(
+                  object.coordinates
+                );
+              }
+              for (var i = 0; i < posts.length; i++) {
+                strCoords[i] = coords[i][0] + ' ' + coords[i][1] + ' ' + coords[i][2]
+              }
+              console.log(strCoords);
+              res.render('vr/demo',
+                {"paths": paths, "coords": strCoords, "floor": floor, "ceiling": ceiling, "wall": wall, "userId": userId, "following": following, "title": username}
               );
-              coords.push(
-                object.coordinates
-              );
-            }
-            for (var i = 0; i < posts.length; i++) {
-              strCoords[i] = coords[i][0] + ' ' + coords[i][1] + ' ' + coords[i][2]
-            }
-            console.log(strCoords);
-            res.render('vr/demo',
-              {"paths": paths, "coords": strCoords, "floor": floor, "ceiling": ceiling, "wall": wall, "userId": userId, "show": show, "following": following}
-            );
+            });
           });
         });
       });
@@ -456,6 +459,7 @@ exports.followUser = (req, res, next) => {
     {
       user.unfollowUser(req.params.userId);
     }
+    req.flash('success', {msg: 'User was followed successfully.'});
     return res.redirect('/getPosts/' + req.params.userId);
   });
 };
@@ -465,7 +469,7 @@ exports.unfollowUser = (req, res, next) => {
     user.unfollowUser(req.params.userId);
   });
   req.flash('success', {msg: 'User was unfollowed successfully.'});
-  return res.redirect('/userProfile/' + req.params.userId);
+  return res.redirect('/getPosts/' + req.params.userId);
 };
 
 exports.getFollowing = (req, res, next) => {

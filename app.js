@@ -90,7 +90,7 @@ app.use(flash());
 
 //This is here because MultiPart doesn't work with CSRF
 app.post('/upload', passportConfig.isAuthenticated, upload.single('myFile'), uploadController.postUpload);
-app.post('/getPosts/:userId', passportConfig.isAuthenticated, userController.followUser);
+app.put('/getPosts/:userId', passportConfig.isAuthenticated, userController.followUser);
 
 app.use((req, res, next) => {
   if (req.path === '/api/upload') {
@@ -142,6 +142,7 @@ app.get('/demo', demoController.index);
 app.get('/upload', passportConfig.isAuthenticated, uploadController.index);
 app.get('/getPosts/:userId', userController.getPosts);
 app.get('/userProfile/:userId', userController.getProfile);
+app.get('/followUser/:userId', passportConfig.isAuthenticated, userController.followUser);
 app.get('/unfollowUser/:userId', passportConfig.isAuthenticated, userController.unfollowUser);
 app.get('/getFollowing', passportConfig.isAuthenticated, userController.getFollowing);
 
