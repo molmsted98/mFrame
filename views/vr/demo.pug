@@ -110,12 +110,18 @@ html
       script.
         var pics = document.getElementsByClassName("a")
 
-        var myFunc = function()
+        var expand = function()
         {
-          this.emit('expand')
+          
+        }
+
+        var contract = function()
+        {
+          
         }
 
         for (var i = 0; i < pics.length; i++)
         {
-          pics[i].addEventListener('click', myFunc)
+          pics[i].addEventListener('mouseenter', expand)
+          pics[i].addEventListener('mouseleave', contract)
         }

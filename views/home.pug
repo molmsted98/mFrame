@@ -1,10 +1,7 @@
 extends layout
 
 block content
-  h1 A VR Social Network
-  p.lead Check out these cool local users.
+  h1 mFrame: A VR Social Network
+  p.lead Find a room to explore.
   hr
-  .row
-    each user in users
-      h1
-      a(href='/getPosts/' + user._id)= '@' + user.username
+  input(type='text' name='search' placeholder='Something new')
