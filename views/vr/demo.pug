@@ -8,7 +8,7 @@
         span.icon-bar
       a.navbar-brand(href='/')
         i.fa.fa-cube
-        | SocialVR
+        | mFrame
     .collapse.navbar-collapse
       ul.nav.navbar-nav
         if following
@@ -79,7 +79,7 @@ html
         if frame
           img(id='frametexture', src='/uploads/' + frame.fileName)
         else
-          img(id='frametexture', color='black')
+          img(id='frametexture', src='/images/frameTexture.png')
         div(id='pictures')
           each path, index in paths
             img(id='a' + index, src='/uploads/' + path)
