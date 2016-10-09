@@ -18,10 +18,18 @@ exports.getUsers = (req, res) => {
   }
   else
   {
-    User.find().sort('-date').limit(5).exec(function(err, users2){
+    User.find().exec(function(err, users2){
+      fusers = [];
+      var ind = 0;
+      for (i = users2.length-1; i > users2.length-6; i--)
+      {
+        fusers[ind] = users2[i];
+        ind ++;
+      }
+      console.log(fusers)
       res.render('home', {
         title: 'Home',
-        "users2": users2
+        "users2": fusers
       });
     });
   }
