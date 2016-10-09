@@ -64,10 +64,10 @@ for (i = 0; i < pictures.length; i++)
     height += .1
     if (rotation == 0 || rotation == 180)
     {
-        document.write('<a-image class="a" color="black" position="'+intCoords[i][0]+' '+intCoords[i][1]+' '+depthExtra+'" rotation="0 '+rotation+' 0" width="' + width + '" height="' + height + '"></a-image>')
+        document.write('<a-image class="a" src="#frametexture" position="'+intCoords[i][0]+' '+intCoords[i][1]+' '+depthExtra+'" rotation="0 '+rotation+' 0" width="' + width + '" height="' + height + '"></a-image>')
     }
     else
     {
-        document.write('<a-image class="a" color="black" position="'+depthExtra+' '+intCoords[i][1]+' '+intCoords[i][2]+'" rotation="0 '+rotation+' 0" width="' + width + '" height="' + height + '"></a-image>')
+        document.write('<a-image class="a" src="#frametexture" position="'+depthExtra+' '+intCoords[i][1]+' '+intCoords[i][2]+'" rotation="0 '+rotation+' 0" width="' + width + '" height="' + height + '"></a-image>')
     }
 }

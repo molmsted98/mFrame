@@ -76,6 +76,10 @@ html
           img(id='floortexture', src='/uploads/' + floor.fileName)
         else
           img(id='floortexture', src='/images/wallstexture.png')
+        if frame
+          img(id='frametexture', src='/uploads/' + frame.fileName)
+        else
+          img(id='frametexture', color='black')
         div(id='pictures')
           each path, index in paths
             img(id='a' + index, src='/uploads/' + path)
