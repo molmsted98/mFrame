@@ -11,3 +11,8 @@ block content
         each auser in users
           h1
           a(href='/getPosts/' + auser._id)= '@' + auser.username
+    .row
+      if users2
+        each buser in users2
+          h1
+          a(href='/getPosts/' + buser._id) = '@' + buser.username

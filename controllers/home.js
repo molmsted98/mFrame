@@ -4,12 +4,19 @@ const User = require('../models/User');
  * Home page.
  */
 exports.getUsers = (req, res) => {
-  User.find({username: req.body.search}).lean().exec((err, users) => {
-    console.log(req.body.search);
-    console.log(users);
-    res.render('home', {
-      title: 'Home',
-      "users": users
+  if (req.body.search)
+  {
+    User.find({username: new RegExp(req.body.search, "i")}).lean().exec((err, users) => {
+      res.render('home', {
+        title: 'Home',
+        "users": users,
+        "users2": users2
+      });
     });
-  });
+  }
+  else {
+    res.render('home', {
+      title: 'Home'
+    });
+  }
 };
