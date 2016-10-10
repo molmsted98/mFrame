@@ -17,8 +17,10 @@
         else
           li(class=(title == 'Follow @' + title))
             a(href='/followUser/' + userId) Follow #{title}
-        li(class=(title == 'Upload') ? 'active' : undefined)
-          a(href='/upload/') Upload
+        if user
+          if currentUrl.includes(user.id)
+            li(class=(title == 'Upload') ? 'active' : undefined)
+              a(href='/upload/') Upload
       ul.nav.navbar-nav.navbar-right
         if !user
           li(class=(title == 'Login') ? 'active' : undefined)
@@ -39,7 +41,7 @@
                 a(href='/getPosts/' + user.id) My Room
               li.divider
               li
-                a(href='/account') My Account
+                a(href='/account') Settings
               li.divider
               li
                 a(href='/logout') Logout

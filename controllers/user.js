@@ -393,6 +393,7 @@ exports.getPosts = (req, res, next) => {
   const userId = req.params.userId;
 
   var following = false;
+  var currentUrl = req.path;
 
   User.findOne({_id: userId}).lean().exec((err, targetUser) => {
     var username = targetUser.username;
@@ -426,7 +427,7 @@ exports.getPosts = (req, res, next) => {
                   }
                   console.log(strCoords);
                   res.render('vr/demo',
-                    {"paths": paths, "coords": strCoords, "floor": floor, "ceiling": ceiling, "wall": wall, "frame": frame, "userId": userId, "following": following, "title": username}
+                    {"paths": paths, "coords": strCoords, "floor": floor, "ceiling": ceiling, "wall": wall, "frame": frame, "userId": userId, "following": following, "title": username, "currentUrl": currentUrl}
                   );
                 });
               });
@@ -459,7 +460,7 @@ exports.getPosts = (req, res, next) => {
                 }
                 console.log(strCoords);
                 res.render('vr/demo',
-                  {"paths": paths, "coords": strCoords, "floor": floor, "ceiling": ceiling, "wall": wall, "frame": frame, "userId": userId, "title": username}
+                  {"paths": paths, "coords": strCoords, "floor": floor, "ceiling": ceiling, "wall": wall, "frame": frame, "userId": userId, "title": username, "currentUrl": currentUrl}
                 );
               });
             });
