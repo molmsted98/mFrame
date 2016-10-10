@@ -17,6 +17,9 @@
           a(href='/upload') Upload
         li(class=(title == 'Following') ? 'active' : undefined)
           a(href='/getFollowing') Following
+        if user != null
+          li(class=(title == 'My Room') ? 'active' : undefined)
+            a(href='/getPosts/' + user.id) My Room
       ul.nav.navbar-nav.navbar-right
         if !user
           li(class=(title == 'Login') ? 'active' : undefined)
@@ -37,7 +40,7 @@
                 a(href='/getPosts/' + user.id) My Room
               li.divider
               li
-                a(href='/account') My Account
+                a(href='/account') Settings
               li.divider
               li
                 a(href='/logout') Logout
