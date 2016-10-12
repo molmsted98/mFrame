@@ -13,23 +13,11 @@ const positions = [
     [-1.9, 4, 1]
 ]
 
-/**
- * GET /
- * Upload page.
- */
-exports.index = (req, res) => {
-    res.render('vr/upload', {
-        title: 'Upload'
-    });
-};
-
-exports.styleIndex = (req, res) => {
-    res.render('vr/uploadStyle', {
-        title: 'Upload Style'
-    });
-};
-
-exports.getUploads = (req, res, next) => {
+/***
+  * GET /upload
+  * Show upload page along with current uploads.
+  */
+exports.index = (req, res, next) => {
     Post.find({
         id: req.user._id
     }).lean().exec((err, posts) => {
@@ -45,8 +33,8 @@ exports.getUploads = (req, res, next) => {
 };
 
 /**
- * GET /
- * Success page.
+ * GET /upload
+ * After the file has been transfered, update database.
  */
 exports.postUpload = (req, res, next) => {
     var numPo
