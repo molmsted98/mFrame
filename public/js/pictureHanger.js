@@ -7,6 +7,8 @@ var items = []
 var strCoords = []
 var intCoords = []
 var coordIndiv = []
+
+//Get and save the coordinates that correspond with posts.
 for (i = 0; i < coords.length; i++) {
     items[i] = coords[i].innerHTML
     strCoords.push(items[i].split(" "))
@@ -16,10 +18,9 @@ for (i = 0; i < coords.length; i++) {
     }
     intCoords.push(coordIndiv)
 }
+
+//Manually write each post into demo.pug with proper coords and files.
 for (i = 0; i < pictures.length; i++) {
-    //window.alert(intCoords[i][0])
-    //window.alert(intCoords[i][1])
-    //window.alert(intCoords[i][2])
     pic = pictures[i]
     width = pic.width
     height = pic.height
