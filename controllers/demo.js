@@ -7,3 +7,12 @@ exports.index = (req, res) => {
         title: 'Demo'
     });
 };
+
+/**
+  * GET /gifTets
+  */
+exports.gifTest = (req, res) => {
+    res.render('vr/gif', {
+        title: 'GIFS'
+    });
+};

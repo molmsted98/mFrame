@@ -1,0 +1,31 @@
+doctype html
+html
+  head
+    meta(charset='utf-8')
+    meta(http-equiv='X-UA-Compatible', content='IE=edge')
+    meta(name='viewport', content='width=device-width, initial-scale=1.0')
+    meta(name='theme-color' content='#4DA5F4')
+    meta(name='csrf-token', content=_csrf)
+    //We want to put in the user's id here.
+    title #{title} - mFrame
+    link(rel='shortcut icon', href='/images/icon.png')
+    link(rel='stylesheet', href='/css/main.css')
+
+  body
+    script(src='/js/lib/jquery-2.2.4.min.js')
+    script(src='/js/lib/bootstrap.min.js')
+    script(src='/js/main.js')
+    script(src='/js/lib/aframe.min.js')
+    script(src='https://rawgit.com/mayognaise/aframe-gif-shader/master/dist/aframe-gif-shader.min.js')
+    script(src='https://rawgit.com/mayognaise/aframe-gif-component/master/dist/aframe-gif-component.min.js')
+
+
+    a-scene
+      a-assets
+          img(id='my-texture' src='/images/nyan.gif')
+
+      a-entity(geometry='primitive:box', position='2 3 0', material='shader:gif;src:#my-texture;', gif='')
+
+      a-camera(user-height='2.5')
+
+      a-sky(color='#777777')
