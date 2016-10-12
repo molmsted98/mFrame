@@ -467,6 +467,11 @@ exports.postForgot = (req, res, next) => {
     });
 };
 
+/***
+  * GET /getPosts/:userId
+  * Gets all images with userId.
+  * Opens up the room, sends a ton of data.
+  */
 exports.getPosts = (req, res, next) => {
     const userId = req.params.userId;
 
@@ -594,6 +599,10 @@ exports.getPosts = (req, res, next) => {
     });
 };
 
+/***
+  * GET /userProfile/:userId
+  * Should be removed, unless we implement profile pages.
+  */
 exports.getProfile = (req, res, next) => {
     const id = req.params.userId;
     const currentUser = req.user;
@@ -611,6 +620,10 @@ exports.getProfile = (req, res, next) => {
     });
 };
 
+/***
+  * GET /followUser/:userId
+  * Follows the user with userId.
+  */
 exports.followUser = (req, res, next) => {
     User.findOne({
         _id: req.user.id
@@ -629,6 +642,10 @@ exports.followUser = (req, res, next) => {
     });
 };
 
+/***
+  * GET /unfollowUser/:userId
+  * Unfollows the user with userId.
+  */
 exports.unfollowUser = (req, res, next) => {
     User.findOne({
         _id: req.user.id
@@ -640,7 +657,10 @@ exports.unfollowUser = (req, res, next) => {
     });
     return res.redirect('/getPosts/' + req.params.userId);
 };
-
+/***
+ * GET /getFollowing
+ * Returns a list of the usernames of users' following.
+ */
 exports.getFollowing = (req, res, next) => {
     User.findOne({
         _id: req.user.id
