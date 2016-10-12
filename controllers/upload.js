@@ -39,6 +39,11 @@ exports.index = (req, res, next) => {
 exports.postUpload = (req, res, next) => {
     var numPo
 
+    if (req.file === undefined)
+    {
+        return res.redirect('/upload');
+    }
+
     if (req.body.type == "Post") {
         Post.find({
             id: req.user.id
