@@ -13,23 +13,11 @@ const positions = [
     [-1.9, 4, 1]
 ]
 
-/**
- * GET /
- * Upload page.
- */
-exports.index = (req, res) => {
-    res.render('vr/upload', {
-        title: 'Upload'
-    });
-};
-
-exports.styleIndex = (req, res) => {
-    res.render('vr/uploadStyle', {
-        title: 'Upload Style'
-    });
-};
-
-exports.getUploads = (req, res, next) => {
+/***
+  * GET /upload
+  * Show upload page along with current uploads.
+  */
+exports.index = (req, res, next) => {
     Post.find({
         id: req.user._id
     }).lean().exec((err, posts) => {
@@ -45,11 +33,16 @@ exports.getUploads = (req, res, next) => {
 };
 
 /**
- * GET /
- * Success page.
+ * GET /upload
+ * After the file has been transfered, update database.
  */
 exports.postUpload = (req, res, next) => {
     var numPo
+
+    if (req.file === undefined)
+    {
+        return res.redirect('/upload');
+    }
 
     if (req.body.type == "Post") {
         Post.find({
@@ -99,17 +92,4 @@ exports.postUpload = (req, res, next) => {
         });
         return res.redirect('/upload');
     }
-};
-
-/***
- * Makes sure that the file to be uploaded won't break the site.
- */
-exports.validateUpload = (req, res, next) => {
-    if (req.file != undefined) {
-        return next();
-    }
-    req.flash('failure', {
-        msg: 'File was not uploaded successfully.'
-    });
-    res.redirect('/upload');
 };

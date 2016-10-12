@@ -3,7 +3,7 @@
  * Demo page.
  */
 exports.index = (req, res) => {
-  res.render('vr/demo', {
-    title: 'Demo'
-  });
+    res.render('vr/demo', {
+        title: 'Demo'
+    });
 };

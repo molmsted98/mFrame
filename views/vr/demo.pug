@@ -1,135 +1,135 @@
 .navbar.navbar-default.navbar-fixed-top
-  .container
-    .navbar-header
-      button.navbar-toggle(type='button', data-toggle='collapse', data-target='.navbar-collapse')
-        span.sr-only Toggle navigation
-        span.icon-bar
-        span.icon-bar
-        span.icon-bar
-      a.navbar-brand(href='/')
-        i.fa.fa-cube
-        | mFrame
-    .collapse.navbar-collapse
-      ul.nav.navbar-nav
-        if following
-          li(class=(title == 'Unfollow @' + title))
-            a(href='/unfollowUser/' + userId) Unfollow #{title}
-        else
-          li(class=(title == 'Follow @' + title))
-            a(href='/followUser/' + userId) Follow #{title}
-        if user
-          if currentUrl.includes(user.id)
-            li(class=(title == 'Upload') ? 'active' : undefined)
-              a(href='/upload/') Upload
-      ul.nav.navbar-nav.navbar-right
-        if !user
-          li(class=(title == 'Login') ? 'active' : undefined)
-            a(href='/login') Login
-          li(class=(title == 'Create Account') ? 'active' : undefined)
-            a(href='/signup') Create Account
-        else
-          li.dropdown(class=(title == 'Account Management') ? 'active' : undefined)
-            a.dropdown-toggle(href='#', data-toggle='dropdown')
-              if user.profile.picture
-                img(src=user.profile.picture)
-              else
-                img(src=user.gravatar())
-              span= user.profile.name || user.email || user.id
-              i.caret
-            ul.dropdown-menu
-              li
-                a(href='/getPosts/' + user.id) My Room
-              li.divider
-              li
-                a(href='/account') Settings
-              li.divider
-              li
-                a(href='/logout') Logout
+    .container
+        .navbar-header
+            button.navbar-toggle(type='button', data-toggle='collapse', data-target='.navbar-collapse')
+                span.sr-only Toggle navigation
+                span.icon-bar
+                span.icon-bar
+                span.icon-bar
+            a.navbar-brand(href='/')
+                i.fa.fa-cube
+                | mFrame
+        .collapse.navbar-collapse
+            ul.nav.navbar-nav
+                if following
+                    li(class=(title == 'Unfollow @' + title))
+                        a(href='/unfollowUser/' + userId) Unfollow #{title}
+                else
+                    li(class=(title == 'Follow @' + title))
+                        a(href='/followUser/' + userId) Follow #{title}
+                if user
+                    if currentUrl.includes(user.id)
+                        li(class=(title == 'Upload') ? 'active' : undefined)
+                            a(href='/upload/') Upload
+            ul.nav.navbar-nav.navbar-right
+                if !user
+                    li(class=(title == 'Login') ? 'active' : undefined)
+                        a(href='/login') Login
+                    li(class=(title == 'Create Account') ? 'active' : undefined)
+                        a(href='/signup') Create Account
+                else
+                    li.dropdown(class=(title == 'Account Management') ? 'active' : undefined)
+                        a.dropdown-toggle(href='#', data-toggle='dropdown')
+                            if user.profile.picture
+                                img(src=user.profile.picture)
+                            else
+                                img(src=user.gravatar())
+                            span= user.profile.name || user.email || user.id
+                            i.caret
+                        ul.dropdown-menu
+                            li
+                                a(href='/getPosts/' + user.id) My Room
+                            li.divider
+                            li
+                                a(href='/account') Settings
+                            li.divider
+                            li
+                                a(href='/logout') Logout
 
 doctype html
 html
-  head
-    meta(charset='utf-8')
-    meta(http-equiv='X-UA-Compatible', content='IE=edge')
-    meta(name='viewport', content='width=device-width, initial-scale=1.0')
-    meta(name='theme-color' content='#4DA5F4')
-    meta(name='csrf-token', content=_csrf)
-    //We want to put in the user's id here.
-    title #{title} - mFrame
-    link(rel='shortcut icon', href='/images/icon.png')
-    link(rel='stylesheet', href='/css/main.css')
+    head
+        meta(charset='utf-8')
+        meta(http-equiv='X-UA-Compatible', content='IE=edge')
+        meta(name='viewport', content='width=device-width, initial-scale=1.0')
+        meta(name='theme-color' content='#4DA5F4')
+        meta(name='csrf-token', content=_csrf)
+        //We want to put in the user's id here.
+        title #{title} - mFrame
+        link(rel='shortcut icon', href='/images/icon.png')
+        link(rel='stylesheet', href='/css/main.css')
 
-  body
-    script(src='/js/lib/jquery-2.2.4.min.js')
-    script(src='/js/lib/bootstrap.min.js')
-    script(src='/js/main.js')
-    script(src='/js/lib/aframe.min.js')
+    body
+        script(src='/js/lib/jquery-2.2.4.min.js')
+        script(src='/js/lib/bootstrap.min.js')
+        script(src='/js/main.js')
+        script(src='/js/lib/aframe.min.js')
 
-    a-scene
-      a-assets
-        img(id='exit', src='/images/exit.png')
-        if wall
-          img(id='walltexture', src='/uploads/' + wall.fileName)
-        else
-          img(id='walltexture', src='/images/wallstexture.png')
-        if ceiling
-          img(id='ceilingtexture', src='/uploads/' + ceiling.fileName)
-        else
-          img(id='ceilingtexture', src='/images/wallstexture.png')
-        if floor
-          img(id='floortexture', src='/uploads/' + floor.fileName)
-        else
-          img(id='floortexture', src='/images/wallstexture.png')
-        if frame
-          img(id='frametexture', src='/uploads/' + frame.fileName)
-        else
-          img(id='frametexture', src='/images/frameTexture.png')
-        div(id='pictures')
-          each path, index in paths
-            img(id='a' + index, src='/uploads/' + path)
-        div(id='userIds')
-          p1= userId
-        div(id='coords')
-          each coord in coords
-            p1= coord
+        a-scene
+            a-assets
+                img(id='exit', src='/images/exit.png')
+                if wall
+                    img(id='walltexture', src='/uploads/' + wall.fileName)
+                else
+                    img(id='walltexture', src='/images/wallstexture.png')
+                if ceiling
+                    img(id='ceilingtexture', src='/uploads/' + ceiling.fileName)
+                else
+                    img(id='ceilingtexture', src='/images/wallstexture.png')
+                if floor
+                    img(id='floortexture', src='/uploads/' + floor.fileName)
+                else
+                    img(id='floortexture', src='/images/wallstexture.png')
+                if frame
+                    img(id='frametexture', src='/uploads/' + frame.fileName)
+                else
+                    img(id='frametexture', src='/images/frameTexture.png')
+                div(id='pictures')
+                    each path, index in paths
+                        img(id='a' + index, src='/uploads/' + path)
+                div(id='userIds')
+                    p1= userId
+                div(id='coords')
+                    each coord in coords
+                        p1= coord
 
-      a-camera(user-height='2.5')
-        //a-cursor(fuse='true' color='teal' fuseTimeout='2000')
+            a-camera(user-height='2.5')
+                //a-cursor(fuse='true' color='teal' fuseTimeout='2000')
 
-      a-image(id='exitBtn' src='#exit' position='0 4.9 0' transparent='true' rotation='90 0 0' width='.5' height='.5')
+            a-image(id='exitBtn' src='#exit' position='0 4.9 0' transparent='true' rotation='90 0 0' width='.5' height='.5')
 
-      script.
-        document.querySelector('#exitBtn').addEventListener('click', function()
-        {
-          window.location = 'http://www.mfra.me';
-        })
+            script.
+                document.querySelector('#exitBtn').addEventListener('click', function()
+                {
+                    window.location = 'http://www.mfra.me';
+                })
 
-      a-image(src='#floortexture', position='0 1 0', rotation='90 0 0', width='3.99', height='3.99')
-      a-image(src='#ceilingtexture', position='0 5 0', rotation='90 0 0', width='3.99', height='3.99')
-      a-image(src='#walltexture', position='2 3 0', rotation='0 270 0', width='3.99', height='3.99')
-      a-image(src='#walltexture', position='-2 3 0', rotation='0 90 0', width='3.99', height='3.99')
-      a-image(src='#walltexture', position='0 3 2', rotation='0 180 0', width='3.99', height='3.99')
-      a-image(src='#walltexture', position='0 3 -2', rotation='0 0 0', width='3.99', height='3.99')
+            a-image(src='#floortexture', position='0 1 0', rotation='90 0 0', width='3.99', height='3.99')
+            a-image(src='#ceilingtexture', position='0 5 0', rotation='90 0 0', width='3.99', height='3.99')
+            a-image(src='#walltexture', position='2 3 0', rotation='0 270 0', width='3.99', height='3.99')
+            a-image(src='#walltexture', position='-2 3 0', rotation='0 90 0', width='3.99', height='3.99')
+            a-image(src='#walltexture', position='0 3 2', rotation='0 180 0', width='3.99', height='3.99')
+            a-image(src='#walltexture', position='0 3 -2', rotation='0 0 0', width='3.99', height='3.99')
 
-      //a-sky(color='#777777')
+            //a-sky(color='#777777')
 
-      script(src='/js/pictureHanger.js')
+            script(src='/js/pictureHanger.js')
 
-      script.
-        var pics = document.getElementsByClassName("a")
+            script.
+                var pics = document.getElementsByClassName("a")
 
-        var expand = function()
-        {
+                var expand = function()
+                {
 
-        }
+                }
 
-        var contract = function()
-        {
+                var contract = function()
+                {
 
-        }
+                }
 
-        for (var i = 0; i < pics.length; i++)
-        {
-          pics[i].addEventListener('mouseenter', expand)
-          pics[i].addEventListener('mouseleave', contract)
-        }
+                for (var i = 0; i < pics.length; i++)
+                {
+                    pics[i].addEventListener('mouseenter', expand)
+                    pics[i].addEventListener('mouseleave', contract)
+                }

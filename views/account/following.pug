@@ -1,9 +1,9 @@
 extends ../layout
 
 block content
-  h1 Following
-  hr
-  .row
-    each follow in following
-      h1
-      a(href='/getPosts/' + follow._id)= '@' + follow.username
+    h1 Following
+    hr
+    .row
+        each follow in following
+            h1
+            a(href='/getPosts/' + follow._id)= '@' + follow.username
