@@ -67,7 +67,7 @@ for (i = 0; i < pictures.length; i++) {
             document.write('<a-image class="a" src="#frametexture" position="' + depthExtra + ' ' + intCoords[i][1] + ' ' + intCoords[i][2] + '" rotation="0 ' + rotation + ' 0" width="' + width + '" height="' + height + '"></a-image>')
         }
     }
-    else if (fileType[i] == 'image')
+    else if (fileType[i] == '' || fileType[i] == 'image')
     {
         document.write('<a-image class="a" src="#' + pic.id + '" position="' + intCoords[i][0] + ' ' + intCoords[i][1] + ' ' + intCoords[i][2] + '" rotation="0 ' + rotation + ' 0" width="' + width + '" height="' + height + '"></a-image>')
         width += .1
