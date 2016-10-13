@@ -18,7 +18,7 @@ public/css/main.css
 
 # API keys and secrets
 .env
-.env/example
+.env.example
 
 # Dependency directory
 node_modules
