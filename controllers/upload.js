@@ -14,9 +14,9 @@ const positions = [
 ]
 
 /***
-  * GET /upload
-  * Show upload page along with current uploads.
-  */
+ * GET /upload
+ * Show upload page along with current uploads.
+ */
 exports.index = (req, res, next) => {
     Post.find({
         id: req.user._id
@@ -37,11 +37,28 @@ exports.index = (req, res, next) => {
  * After the file has been transfered, update database.
  */
 exports.postUpload = (req, res, next) => {
-    var numPo
+    var numPo;
+    var fileExtension = 'image';
 
-    if (req.file === undefined)
-    {
+    //When calling req.file.mimetype
+    //.gif = image/gif
+    //.png = image/png
+    //.jpg = image/jpeg
+    //.jpeg = image/jpeg
+
+    if (req.file === undefined) {
         return res.redirect('/upload');
+    }
+
+    if (req.file.mimetype == 'image/gif') {
+        fileExtension = 'gif';
+    } else if (req.file.mimetype == 'some movie type') {
+        //Eventually have support for videos?
+    } else if (req.file.mimetype == 'image/png' || req.file.mimetype == 'image/jpeg') {
+        //Come up with something better, to include obscure images
+        fileExtension = 'image';
+    } else {
+        //Not an image, shouldn't be able to get here.
     }
 
     if (req.body.type == "Post") {
@@ -53,7 +70,8 @@ exports.postUpload = (req, res, next) => {
             const post = new Post({
                 id: req.user.id,
                 fileName: req.file.filename,
-                coordinates: positions[numPo]
+                coordinates: positions[numPo],
+                fileType: fileExtension
             });
             post.save((err) => {
                 req.flash('failure', {

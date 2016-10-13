@@ -64,6 +64,8 @@ html
         script(src='/js/lib/bootstrap.min.js')
         script(src='/js/main.js')
         script(src='/js/lib/aframe.min.js')
+        script(src='https://rawgit.com/mayognaise/aframe-gif-shader/master/dist/aframe-gif-shader.min.js')
+        script(src='https://rawgit.com/mayognaise/aframe-gif-component/master/dist/aframe-gif-component.min.js')
 
         a-scene
             a-assets
@@ -92,6 +94,9 @@ html
                 div(id='coords')
                     each coord in coords
                         p1= coord
+                div(id='fileTypes')
+                    each fileType in fileTypes
+                        p1= fileType
 
             a-camera(user-height='2.5')
                 //a-cursor(fuse='true' color='teal' fuseTimeout='2000')
@@ -112,7 +117,6 @@ html
             a-image(src='#walltexture', position='0 3 -2', rotation='0 0 0', width='3.99', height='3.99')
 
             //a-sky(color='#777777')
-
             script(src='/js/pictureHanger.js')
 
             script.

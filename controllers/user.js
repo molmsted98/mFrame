@@ -512,6 +512,7 @@ exports.getPosts = (req, res, next) => {
                                     paths = [];
                                     coords = [];
                                     strCoords = [];
+                                    fileTypes = [];
                                     for (var i = 0; i < posts.length; i++) {
                                         var object = posts[i];
                                         paths.push(
@@ -520,11 +521,13 @@ exports.getPosts = (req, res, next) => {
                                         coords.push(
                                             object.coordinates
                                         );
+                                        fileTypes.push(
+                                            object.fileType
+                                        );
                                     }
                                     for (var i = 0; i < posts.length; i++) {
                                         strCoords[i] = coords[i][0] + ' ' + coords[i][1] + ' ' + coords[i][2]
                                     }
-                                    console.log(strCoords);
                                     res.render('vr/demo', {
                                         "paths": paths,
                                         "coords": strCoords,
@@ -535,7 +538,8 @@ exports.getPosts = (req, res, next) => {
                                         "userId": userId,
                                         "following": following,
                                         "title": username,
-                                        "currentUrl": currentUrl
+                                        "currentUrl": currentUrl,
+                                        "fileTypes": fileTypes
                                     });
                                 });
                             });

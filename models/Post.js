@@ -3,7 +3,8 @@ const mongoose = require('mongoose');
 const postSchema = new mongoose.Schema({
     id: String,
     fileName: String,
-    coordinates: [Number]
+    coordinates: [Number],
+    fileType: String
 }, {
     timestamps: true
 });
