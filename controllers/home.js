@@ -10,12 +10,6 @@ exports.getUsers = (req, res) => {
         User.find({
             username: new RegExp(req.body.search, "i")
         }).lean().exec((err, users) => {
-            fusers = [];
-            var ind = 0;
-            for (i = users2.length - 1; i > users2.length - 6 && i > 0; i--) {
-                fusers[ind] = users2[i];
-                ind++;
-            }
             User.find().exec(function(err, users2) {
                 fusers = [];
                 var ind = 0;
