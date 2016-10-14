@@ -10,11 +10,23 @@ exports.getUsers = (req, res) => {
         User.find({
             username: new RegExp(req.body.search, "i")
         }).lean().exec((err, users) => {
-            User.find().sort('-date').limit(5).exec(function(err, users2) {
+            fusers = [];
+            var ind = 0;
+            for (i = users2.length - 1; i > users2.length - 6 && i > 0; i--) {
+                fusers[ind] = users2[i];
+                ind++;
+            }
+            User.find().exec(function(err, users2) {
+                fusers = [];
+                var ind = 0;
+                for (i = users2.length - 1; i > users2.length - 6 && i > 0; i--) {
+                    fusers[ind] = users2[i];
+                    ind++;
+                }
                 res.render('home', {
                     title: 'Home',
                     "users": users,
-                    "users2": users2
+                    "users2": fusers
                 });
             });
         });
@@ -23,12 +35,10 @@ exports.getUsers = (req, res) => {
         User.find().exec(function(err, users2) {
             fusers = [];
             var ind = 0;
-            console.log(fusers)
             for (i = users2.length - 1; i > users2.length - 6 && i > 0; i--) {
                 fusers[ind] = users2[i];
                 ind++;
             }
-            console.log(fusers)
             res.render('home', {
                 title: 'Home',
                 "users2": fusers
