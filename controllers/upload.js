@@ -31,7 +31,6 @@ exports.index = (req, res, next) => {
         });
     });
 };
-
 /**
  * GET /upload
  * After the file has been transfered, update database.
@@ -61,18 +60,39 @@ exports.postUpload = (req, res, next) => {
         //Not an image, shouldn't be able to get here.
     }
 
-    if (req.body.type == "Post") {
-        Post.find({
-            id: req.user.id
-        }).lean().exec((err, posts) => {
-            numPo = posts.length
-            console.log(numPo)
-            const post = new Post({
-                id: req.user.id,
-                fileName: req.file.filename,
-                coordinates: positions[numPo],
-                fileType: fileExtension
+
+    if (req.body.type == "Post") 
+    {
+        if (req.body.selected >= 0)
+        {
+            Post.find({ id: req.user.id }).lean().exec((err,posts) => 
+            {
+                var pId = posts[parseInt(req.body.selected)]._id;
+                Post.find({id: req.user.id, _id:pId}).remove().exec();
             });
+        }
+        Post.find({ id: req.user.id }).lean().exec((err, posts) => 
+        {
+            numPo = posts.length
+            var post;
+            if (parseInt(req.body.selected) < 0)
+            {
+                post = new Post({
+                    id: req.user.id,
+                    fileName: req.file.filename,
+                    coordinates: positions[numPo],
+                    fileType: fileExtension
+                });
+            }
+            else
+            {
+                post = new Post({
+                    id: req.user.id,
+                    fileName: req.file.filename,
+                    coordinates: posts[parseInt(req.body.selected)].coordinates,
+                    fileType: fileExtension
+                });
+            }
             post.save((err) => {
                 req.flash('failure', {
                     msg: 'File was not uploaded successfully.'
@@ -84,7 +104,9 @@ exports.postUpload = (req, res, next) => {
             });
             return res.redirect('/upload');
         });
-    } else {
+    } 
+    else 
+    {
         //Remove the existing style.
         Style.find({
             id: req.user.id,

@@ -37,13 +37,14 @@ block content
                 .form-group
                     label.control-label File Input
                     input(type='file', name='myFile')
+                    input(type='hidden', name='selected')
                     select(name='type' onChange='check();')
                         option(value='Post') Post
                         option(value='Wall') Wall
                         option(value='Ceiling') Ceiling
                         option(value='Floor') Floor
                         option(value='Frame') Frame
-                button.btn.btn-primary(type='submit') Submit
+                button.btn.btn-primary(type='submit', id='subButton') Submit
             p(id='warning')
             p(id='warn2')
             p(id='postWarn')
@@ -52,4 +53,113 @@ block content
             else
                 p() Current Posts:
             each path, index in filenames
-                img(id='a' + index, src='/uploads/' + path, height='150' width='150' style={margin: '10px'})
+                img(id='a' + index, class='upImg', src='/uploads/' + path, height='150' width='150' style={margin: '10px'})
+
+            script.
+                var pics = document.getElementsByClassName("upImg")
+
+                var selected = pics[0]
+
+                document.getElementsByName("selected")[0].value = -1;
+
+                var select0 = function()
+                {
+                    selected.style.border = "thick none #FF00FF"
+                    this.style.border = "thick solid #0000FF"
+                    selected = this
+                    document.getElementsByName("selected")[0].value = 0;
+                    document.getElementById("subButton").disabled = false;
+                }
+                var select1 = function()
+                {
+                    selected.style.border = "thick none #FF00FF"
+                    this.style.border = "thick solid #0000FF"
+                    selected = this
+                    document.getElementsByName("selected")[0].value = 1;
+                    document.getElementById("subButton").disabled = false;
+                }
+                var select2 = function()
+                {
+                    selected.style.border = "thick none #FF00FF"
+                    this.style.border = "thick solid #0000FF"
+                    selected = this
+                    document.getElementsByName("selected")[0].value = 2;
+                    document.getElementById("subButton").disabled = false;
+                }
+                var select3 = function()
+                {
+                    selected.style.border = "thick none #FF00FF"
+                    this.style.border = "thick solid #0000FF"
+                    selected = this
+                    document.getElementsByName("selected")[0].value = 3;
+                    document.getElementById("subButton").disabled = false;
+                }
+                var select4 = function()
+                {
+                    selected.style.border = "thick none #FF00FF"
+                    this.style.border = "thick solid #0000FF"
+                    selected = this
+                    document.getElementsByName("selected")[0].value = 4;
+                    document.getElementById("subButton").disabled = false;
+                }
+                var select5 = function()
+                {
+                    selected.style.border = "thick none #FF00FF"
+                    this.style.border = "thick solid #0000FF"
+                    selected = this
+                    document.getElementsByName("selected")[0].value = 5;
+                    document.getElementById("subButton").disabled = false;
+                }
+                var select6 = function()
+                {
+                    selected.style.border = "thick none #FF00FF"
+                    this.style.border = "thick solid #0000FF"
+                    selected = this
+                    document.getElementsByName("selected")[0].value = 6;
+                    document.getElementById("subButton").disabled = false;
+                }
+                var select7 = function()
+                {
+                    selected.style.border = "thick none #FF00FF"
+                    this.style.border = "thick solid #0000FF"
+                    selected = this
+                    document.getElementsByName("selected")[0].value = 7;
+                    document.getElementById("subButton").disabled = false;
+                }
+                
+
+                for (var i = 0; i < pics.length; i++)
+                {
+                    switch(i)
+                    {
+                        case 0:
+                            pics[i].addEventListener('click', select0)
+                            break
+                        case 1:
+                            pics[i].addEventListener('click', select1)
+                            break
+                        case 2:
+                            pics[i].addEventListener('click', select2)
+                            break
+                        case 3:
+                            pics[i].addEventListener('click', select3)
+                            break
+                        case 4:
+                            pics[i].addEventListener('click', select4)
+                            break
+                        case 5:
+                            pics[i].addEventListener('click', select5)
+                            break
+                        case 6:
+                            pics[i].addEventListener('click', select6)
+                            break
+                        case 7:
+                            pics[i].addEventListener('click', select7)
+                            break
+                    }
+                }
+
+                if (pics.length >= 8 && document.getElementsByName("selected")[0].value < 0)
+                {
+                    document.getElementById("subButton").disabled = true;
+                }
