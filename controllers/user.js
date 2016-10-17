@@ -513,7 +513,6 @@ exports.getPosts = (req, res, next) => {
                                     coords = [];
                                     strCoords = [];
                                     fileTypes = [];
-                                    console.log(posts);
                                     for (var i = 0; i < posts.length; i++) {
                                         var object = posts[i];
                                         paths.push(
