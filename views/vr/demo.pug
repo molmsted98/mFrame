@@ -34,7 +34,7 @@
                                 img(src=user.profile.picture)
                             else
                                 img(src=user.gravatar())
-                            span= user.profile.name || user.email || user.id
+                            span= user.username || user.email || user.id
                             i.caret
                         ul.dropdown-menu
                             li
