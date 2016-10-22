@@ -49,10 +49,10 @@ for (i = 0; i < pictures.length; i++) {
         rotation = 180
         depthExtra = intCoords[i][2] + .01
     } else if (intCoords[i][0] == 1.9) {
-        rotation = 90
+        rotation = 270
         depthExtra = intCoords[i][0] + .01
     } else {
-        rotation = 270
+        rotation = 90
         depthExtra = intCoords[i][0] - .01
     }
 
