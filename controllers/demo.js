@@ -9,10 +9,19 @@ exports.index = (req, res) => {
 };
 
 /**
-  * GET /gifTets
+  * GET /gifTest
   */
 exports.gifTest = (req, res) => {
     res.render('vr/gif', {
         title: 'GIFS'
+    });
+};
+
+/**
+  * GET /moveTest
+  */
+exports.moveTest = (req, res) => {
+    res.render('vr/move', {
+        title: 'Move'
     });
 };

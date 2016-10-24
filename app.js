@@ -157,6 +157,7 @@ app.get('/followUser/:userId', passportConfig.isAuthenticated, userController.fo
 app.get('/unfollowUser/:userId', passportConfig.isAuthenticated, userController.unfollowUser);
 app.get('/getFollowing', passportConfig.isAuthenticated, userController.getFollowing);
 app.get('/gifTest', demoController.gifTest);
+app.get('/moveTest', demoController.moveTest);
 
 /**
  * API examples routes.
