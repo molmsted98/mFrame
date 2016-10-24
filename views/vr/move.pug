@@ -1,0 +1,102 @@
+doctype html
+html
+    head
+        meta(charset='utf-8')
+        meta(http-equiv='X-UA-Compatible', content='IE=edge')
+        meta(name='viewport', content='width=device-width, initial-scale=1.0')
+        meta(name='theme-color' content='#4DA5F4')
+        meta(name='csrf-token', content=_csrf)
+        //We want to put in the user's id here.
+        title #{title} - mFrame
+        link(rel='shortcut icon', href='/images/icon.png')
+        link(rel='stylesheet', href='/css/main.css')
+
+    body
+        script(src='/js/lib/jquery-2.2.4.min.js')
+        script(src='/js/lib/bootstrap.min.js')
+        script(src='/js/main.js')
+        script(src='/js/lib/aframe.min.js')
+
+        a-scene
+            a-assets
+                img(id='my-texture' src='/images/me.png')
+                img(id='menutext' src='/images/stars.jpg')
+                img(id='cancel' src='/images/cancel.jpg')
+                img(id='move' src='/images/move.jpg')
+                img(id='moveHere' src='/images/moveHere.jpg')
+
+            a-image(id='picture' src='#my-texture' position='2 3 0' rotation='0 90 0')
+            a-image(id='menuMove' visible='false' src='#move' position='2 3 1' rotation='0 -90 0')
+            a-image(id='menuClose' visible='false' src='#cancel' position='2 3 2' rotation='0 -90 0')
+            a-image(id='move1' visible='false' src='#moveHere' position='2 3 -1' rotation='0 -90 0')
+            a-image(id='move2' visible='false' src='#moveHere' position='2 3 -2' rotation='0 -90 0')
+
+            a-camera(user-height='2.5')
+                a-cursor(id='cursor' fuse='true' color='teal' fuseTimeout='750')
+
+            script.
+                document.querySelector('#picture').addEventListener('click', function()
+                {
+                    var picturePos = document.querySelector('#picture').getAttribute('position');
+                    var newZ = parseInt(picturePos.z) + 1;
+                    var newZ2 = parseInt(picturePos.z) + 2;
+                    var newPos = picturePos.x + ' ' + picturePos.y + ' ' + newZ;
+                    var newPos2 = picturePos.x + ' ' + picturePos.y + ' ' + newZ2;
+                    console.log('New pos: ' + picturePos.x + ' ' + picturePos.y + ' ' + newZ);
+                    document.querySelector('#menuMove').setAttribute('position', newPos);
+                    document.querySelector('#menuClose').setAttribute('position', newPos2);
+                    document.querySelector('#menuMove').setAttribute('visible', 'true');
+                    document.querySelector('#menuClose').setAttribute('visible', 'true');
+                    document.querySelector('#menuMove').setAttribute('visible', 'true');
+                    document.querySelector('#menuClose').setAttribute('visible', 'true');
+                    document.querySelector('#picture').setAttribute('visible', 'false');
+                })
+
+            script.
+                document.querySelector('#menuMove').addEventListener('click', function()
+                {
+                    console.log('move was clicked')
+                    document.querySelector('#menuMove').setAttribute('visible', 'false');
+                    document.querySelector('#move1').setAttribute('visible', 'true');
+                    document.querySelector('#move2').setAttribute('visible', 'true');
+                    document.querySelector('#cursor').setAttribute('fuseTimeout', '1500');
+                    document.querySelector('#menuClose').setAttribute('visible', 'false');
+                })
+
+            script.
+                document.querySelector('#menuClose').addEventListener('click', function()
+                {
+                    console.log('Menu was closed')
+                    document.querySelector('#menuMove').setAttribute('visible', 'false');
+                    document.querySelector('#menuClose').setAttribute('visible', 'false');
+                    document.querySelector('#move1').setAttribute('visible', 'false');
+                    document.querySelector('#move2').setAttribute('visible', 'false');
+                    document.querySelector('#cursor').setAttribute('fuseTimeout', '750');
+                    document.querySelector('#picture').setAttribute('visible', 'true');
+                })
+
+            script.
+                document.querySelector('#move1').addEventListener('click', function()
+                {
+                    console.log('Moved to 1')
+                    document.querySelector('#menuMove').setAttribute('visible', 'false');
+                    document.querySelector('#menuClose').setAttribute('visible', 'false');
+                    document.querySelector('#move1').setAttribute('visible', 'false');
+                    document.querySelector('#move2').setAttribute('visible', 'false');
+                    document.querySelector('#cursor').setAttribute('fuseTimeout', '750');
+                    document.querySelector('#picture').setAttribute('position', '2 3 -1');
+                    document.querySelector('#picture').setAttribute('visible', 'true');
+                })
+
+            script.
+                document.querySelector('#move2').addEventListener('click', function()
+                {
+                    console.log('Moved to 2')
+                    document.querySelector('#menuMove').setAttribute('visible', 'false');
+                    document.querySelector('#menuClose').setAttribute('visible', 'false');
+                    document.querySelector('#move1').setAttribute('visible', 'false');
+                    document.querySelector('#move2').setAttribute('visible', 'false');
+                    document.querySelector('#cursor').setAttribute('fuseTimeout', '750');
+                    document.querySelector('#picture').setAttribute('position', '2 3 -2');
+                    document.querySelector('#picture').setAttribute('visible', 'true');
+                })
