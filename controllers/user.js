@@ -513,6 +513,7 @@ exports.getPosts = (req, res, next) => {
                                     coords = [];
                                     strCoords = [];
                                     fileTypes = [];
+                                    console.log(posts);
                                     for (var i = 0; i < posts.length; i++) {
                                         var object = posts[i];
                                         paths.push(
@@ -548,6 +549,7 @@ exports.getPosts = (req, res, next) => {
                 });
             });
         } else {
+            console.log(userId)
             Style.findOne({
                 id: userId,
                 type: "Frame"
@@ -578,6 +580,9 @@ exports.getPosts = (req, res, next) => {
                                     coords.push(
                                         object.coordinates
                                     );
+                                    fileTypes.push(
+                                        object.fileType
+                                    );
                                 }
                                 for (var i = 0; i < posts.length; i++) {
                                     strCoords[i] = coords[i][0] + ' ' + coords[i][1] + ' ' + coords[i][2]
@@ -592,7 +597,8 @@ exports.getPosts = (req, res, next) => {
                                     "frame": frame,
                                     "userId": userId,
                                     "title": username,
-                                    "currentUrl": currentUrl
+                                    "currentUrl": currentUrl,
+                                    "fileTypes": fileTypes
                                 });
                             });
                         });
