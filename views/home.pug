@@ -12,8 +12,8 @@ block content
                     a(href='/getPosts/' + auser._id)= '@' + auser.username
         br
         hr
-        p.lead Recently created rooms
+        p.lead Check out some of the demo rooms
         .row-lg-12.col-md-12
-            each buser in users2
-                h1
+            each buser in demoUsers
                 a(href='/getPosts/' + buser._id)= '@' + buser.username
+                h1
