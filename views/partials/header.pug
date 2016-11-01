@@ -21,7 +21,7 @@
                     li(class=(title == 'My Room') ? 'active' : undefined)
                         a(href='/getPosts/' + user.id) My Room
             ul.nav.navbar-nav.navbar-right
-                if !user
+                if  user == null
                     li(class=(title == 'Login') ? 'active' : undefined)
                         a(href='/login') Login
                     li(class=(title == 'Create Account') ? 'active' : undefined)
@@ -40,7 +40,7 @@
                                 a(href='/getPosts/' + user.id) My Room
                             li.divider
                             li
-                                a(href='/account') Settings
+                                a(href='/account') Account
                             li.divider
                             li
                                 a(href='/logout') Logout
