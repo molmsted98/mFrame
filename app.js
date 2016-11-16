@@ -35,7 +35,6 @@ dotenv.load({
  */
 const homeController = require('./controllers/home');
 const userController = require('./controllers/user');
-const apiController = require('./controllers/api');
 const demoController = require('./controllers/demo');
 const uploadController = require('./controllers/upload');
 
@@ -95,14 +94,8 @@ app.use(passport.initialize());
 app.use(passport.session());
 app.use(flash());
 
-//This is here because MultiPart doesn't work with CSRF
-app.post('/upload', passportConfig.isAuthenticated, upload.single('myFile'), uploadController.postUpload);
-app.put('/getPosts/:userId', passportConfig.isAuthenticated, userController.followUser);
-app.post('/', homeController.getUsers);
-
-//TODO: Try changing the req.path in the next part to fix above issue.
 app.use((req, res, next) => {
-    if (req.path === '/api/upload') {
+    if (req.path === '/api/upload' || req.path === '/upload' || req.path === '/' || req.path === '/getPosts/:userId') {
         next();
     } else {
         lusca.csrf()(req, res, next);
@@ -156,6 +149,9 @@ app.get('/unfollowUser/:userId', passportConfig.isAuthenticated, userController.
 app.get('/getFollowing', passportConfig.isAuthenticated, userController.getFollowing);
 app.get('/gifTest', demoController.gifTest);
 app.get('/moveTest', demoController.moveTest);
+app.post('/upload', passportConfig.isAuthenticated, upload.single('myFile'), uploadController.postUpload);
+app.put('/getPosts/:userId', passportConfig.isAuthenticated, userController.followUser);
+app.post('/', homeController.getUsers);
 
 /**
  * API routes.
