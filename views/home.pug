@@ -9,11 +9,11 @@ block content
             if users
                 each auser in users
                     h1
-                    a(href='/getPosts/' + auser._id)= '@' + auser.username
+                    a(href='/api/users/' + auser._id + '/posts')= '@' + auser.username
         br
         hr
         p.lead Check out some of the demo rooms
         .row-lg-12.col-md-12
             each buser in demoUsers
-                a(href='/getPosts/' + buser._id)= '@' + buser.username
+                a(href='/api/users/' + buser._id + '/posts')= '@' + buser.username
                 h1

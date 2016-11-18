@@ -126,6 +126,7 @@ app.use(express.static(path.join(__dirname, 'public'), {
  * Primary app routes.
  */
 app.get('/', homeController.getUsers);
+app.post('/', homeController.getUsers);
 app.get('/login', userController.getLogin);
 app.post('/login', userController.postLogin);
 app.get('/logout', userController.logout);
@@ -142,7 +143,6 @@ app.post('/account/delete', passportConfig.isAuthenticated, userController.postD
 app.get('/account/unlink/:provider', passportConfig.isAuthenticated, userController.getOauthUnlink);
 app.get('/demo', demoController.index);
 app.get('/upload', passportConfig.isAuthenticated, uploadController.index);
-app.get('/getPosts/:userId', userController.getPosts);
 app.get('/userProfile/:userId', userController.getProfile);
 app.get('/followUser/:userId', passportConfig.isAuthenticated, userController.followUser);
 app.get('/unfollowUser/:userId', passportConfig.isAuthenticated, userController.unfollowUser);
@@ -151,12 +151,15 @@ app.get('/gifTest', demoController.gifTest);
 app.get('/moveTest', demoController.moveTest);
 app.post('/upload', passportConfig.isAuthenticated, upload.single('myFile'), uploadController.postUpload);
 app.put('/getPosts/:userId', passportConfig.isAuthenticated, userController.followUser);
-app.post('/', homeController.getUsers);
 
 /**
  * API routes.
  */
-
+app.get('/api/users/:userId/posts', userController.getPosts);
+app.get('/api/users/:userId/following', userController.getFollowing);
+app.get('/api/users/:userId/followers', userController.getFollowers);
+app.post('/api/users/:userId/follow', passportConfig.isAuthenticated, userController.followUser);
+app.post('/api/users/:userId/unfollow', passportConfig.isAuthenticated, userController.unfollowUser);6
 
 /**
  * OAuth authentication routes. (Sign in)

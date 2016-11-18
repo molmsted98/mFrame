@@ -468,7 +468,7 @@ exports.postForgot = (req, res, next) => {
 };
 
 /***
-  * GET /getPosts/:userId
+  * GET /api/users/:userId/posts
   * Gets all images with userId.
   * Opens up the room, sends a ton of data.
   */
@@ -632,7 +632,7 @@ exports.getProfile = (req, res, next) => {
 };
 
 /***
-  * GET /followUser/:userId
+  * POST /api/users/:userId/follow
   * Follows the user with userId.
   */
 exports.followUser = (req, res, next) => {
@@ -649,12 +649,12 @@ exports.followUser = (req, res, next) => {
         req.flash('success', {
             msg: 'User was followed successfully.'
         });
-        return res.redirect('/getPosts/' + req.params.userId);
+        return res.redirect('/api/users/' + req.params.userId + '/posts');
     });
 };
 
 /***
-  * GET /unfollowUser/:userId
+  * POST /api/users/:userId/unfollow
   * Unfollows the user with userId.
   */
 exports.unfollowUser = (req, res, next) => {
@@ -666,17 +666,18 @@ exports.unfollowUser = (req, res, next) => {
     req.flash('success', {
         msg: 'User was unfollowed successfully.'
     });
-    return res.redirect('/getPosts/' + req.params.userId);
+    return res.redirect('/api/users/' + req.params.userId + '/posts');
 };
+
 /***
  * GET /getFollowing
  * Returns a list of the usernames of users' following.
  */
 exports.getFollowing = (req, res, next) => {
     User.findOne({
-        _id: req.user.id
-    }).lean().exec((err, currentUser) => {
-        followingIds = currentUser.following;
+        _id: req.params.userId
+    }).lean().exec((err, user) => {
+        followingIds = user.following;
         User.find({
             _id: {
                 $in: followingIds
@@ -686,6 +687,24 @@ exports.getFollowing = (req, res, next) => {
                 title: 'Following',
                 "following": following
             });
+        });
+    });
+};
+
+/***
+  * GET /api/users/:userId/followers
+  * Return a list of the usernames that are following the user with userId
+  */
+exports.getFollowers = (req, res, next) => {
+    User.findOne({
+        _id: req.params.userId
+    }).exec((err, theUser) => {
+        User.find({
+            following: theUser._id
+        }).exec((err, followers) => {
+            //res.setHeader('Content-Type', 'application/json');
+            //res.send(JSON.stringify(followers));
+            res.send(followers);
         });
     });
 };
