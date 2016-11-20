@@ -18,3 +18,23 @@ exports.getFollowers = (req, res, next) => {
         });
     });
 };
+
+/***
+ * GET /api/users/:userId/following
+ * Returns a list of the usernames of users' following.
+ */
+exports.getFollowing = (req, res, next) => {
+    User.findOne({
+        _id: req.params.userId
+    }).lean().exec((err, user) => {
+        followingIds = user.following;
+        User.find({
+            _id: {
+                $in: followingIds
+            }
+        }).exec((err, following) => {
+            res.setHeader('Content-Type', 'application/json');
+            res.json(following);
+        });
+    });
+};

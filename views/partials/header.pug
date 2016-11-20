@@ -17,7 +17,7 @@
                     a(href='/upload') Upload
                 if user != null
                     li(class=(title == 'Following') ? 'active' : undefined)
-                        a(href='/api/users/' + user.id + '/following') Following
+                        a(href='/' + user.id + '/following') Following
                 if user != null
                     li(class=(title == 'My Room') ? 'active' : undefined)
                         a(href='/api/users/' + user.id + '/posts') My Room

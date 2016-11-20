@@ -671,24 +671,24 @@ exports.unfollowUser = (req, res, next) => {
 };
 
 /***
- * GET /getFollowing
+ * GET /:userId/following
  * Returns a list of the usernames of users' following.
  */
-exports.getFollowing = (req, res, next) => {
-    User.findOne({
-        _id: req.params.userId
-    }).lean().exec((err, user) => {
-        followingIds = user.following;
-        User.find({
-            _id: {
-                $in: followingIds
-            }
-        }).exec((err, following) => {
+exports.showFollowing = (req, res, next) => {
+    theUrl = "http://mfra.me/api/users/" + req.params.userId + "/following";
+
+    request({
+        url: theUrl,
+        json: true
+    }, function(error, response, body) {
+        if (!error && response.statusCode === 200) {
             res.render('account/following', {
                 title: 'Following',
-                "following": following
+                "following": body
             });
-        });
+        } else {
+            console.log(error);
+        }
     });
 };
 

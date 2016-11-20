@@ -147,7 +147,7 @@ app.get('/upload', passportConfig.isAuthenticated, uploadController.index);
 app.get('/userProfile/:userId', userController.getProfile);
 app.get('/followUser/:userId', passportConfig.isAuthenticated, userController.followUser);
 app.get('/unfollowUser/:userId', passportConfig.isAuthenticated, userController.unfollowUser);
-app.get('/getFollowing', passportConfig.isAuthenticated, userController.getFollowing);
+app.get('/:userId/following', passportConfig.isAuthenticated, userController.showFollowing);
 app.get('/gifTest', demoController.gifTest);
 app.get('/moveTest', demoController.moveTest);
 app.post('/upload', passportConfig.isAuthenticated, upload.single('myFile'), uploadController.postUpload);
@@ -158,7 +158,7 @@ app.get('/:userId/followers', userController.showFollowers);
  * API routes.
  */
 app.get('/api/users/:userId/posts', userController.getPosts);
-app.get('/api/users/:userId/following', userController.getFollowing);
+app.get('/api/users/:userId/following', apiController.getFollowing);
 app.get('/api/users/:userId/followers', apiController.getFollowers);
 app.post('/api/users/:userId/follow', passportConfig.isAuthenticated, userController.followUser);
 app.post('/api/users/:userId/unfollow', passportConfig.isAuthenticated, userController.unfollowUser);
