@@ -37,6 +37,7 @@ const homeController = require('./controllers/home');
 const userController = require('./controllers/user');
 const demoController = require('./controllers/demo');
 const uploadController = require('./controllers/upload');
+const apiController = require('./controllers/api');
 
 /**
  * API keys and Passport configuration.
@@ -151,15 +152,16 @@ app.get('/gifTest', demoController.gifTest);
 app.get('/moveTest', demoController.moveTest);
 app.post('/upload', passportConfig.isAuthenticated, upload.single('myFile'), uploadController.postUpload);
 app.put('/getPosts/:userId', passportConfig.isAuthenticated, userController.followUser);
+app.get('/:userId/followers', userController.showFollowers);
 
 /**
  * API routes.
  */
 app.get('/api/users/:userId/posts', userController.getPosts);
 app.get('/api/users/:userId/following', userController.getFollowing);
-app.get('/api/users/:userId/followers', userController.getFollowers);
+app.get('/api/users/:userId/followers', apiController.getFollowers);
 app.post('/api/users/:userId/follow', passportConfig.isAuthenticated, userController.followUser);
-app.post('/api/users/:userId/unfollow', passportConfig.isAuthenticated, userController.unfollowUser);6
+app.post('/api/users/:userId/unfollow', passportConfig.isAuthenticated, userController.unfollowUser);
 
 /**
  * OAuth authentication routes. (Sign in)

@@ -6,6 +6,7 @@ const User = require('../models/User');
 const Post = require('../models/Post');
 const Style = require('../models/Style');
 const fs = require("fs");
+const request = require("request");
 
 /**
  * GET /login
@@ -468,10 +469,10 @@ exports.postForgot = (req, res, next) => {
 };
 
 /***
-  * GET /api/users/:userId/posts
-  * Gets all images with userId.
-  * Opens up the room, sends a ton of data.
-  */
+ * GET /api/users/:userId/posts
+ * Gets all images with userId.
+ * Opens up the room, sends a ton of data.
+ */
 exports.getPosts = (req, res, next) => {
     const userId = req.params.userId;
 
@@ -611,9 +612,9 @@ exports.getPosts = (req, res, next) => {
 };
 
 /***
-  * GET /userProfile/:userId
-  * Should be removed, unless we implement profile pages.
-  */
+ * GET /userProfile/:userId
+ * Should be removed, unless we implement profile pages.
+ */
 exports.getProfile = (req, res, next) => {
     const id = req.params.userId;
     const currentUser = req.user;
@@ -632,9 +633,9 @@ exports.getProfile = (req, res, next) => {
 };
 
 /***
-  * POST /api/users/:userId/follow
-  * Follows the user with userId.
-  */
+ * POST /api/users/:userId/follow
+ * Follows the user with userId.
+ */
 exports.followUser = (req, res, next) => {
     User.findOne({
         _id: req.user.id
@@ -654,9 +655,9 @@ exports.followUser = (req, res, next) => {
 };
 
 /***
-  * POST /api/users/:userId/unfollow
-  * Unfollows the user with userId.
-  */
+ * POST /api/users/:userId/unfollow
+ * Unfollows the user with userId.
+ */
 exports.unfollowUser = (req, res, next) => {
     User.findOne({
         _id: req.user.id
@@ -692,19 +693,22 @@ exports.getFollowing = (req, res, next) => {
 };
 
 /***
-  * GET /api/users/:userId/followers
-  * Return a list of the usernames that are following the user with userId
-  */
-exports.getFollowers = (req, res, next) => {
-    User.findOne({
-        _id: req.params.userId
-    }).exec((err, theUser) => {
-        User.find({
-            following: theUser._id
-        }).exec((err, followers) => {
-            //res.setHeader('Content-Type', 'application/json');
-            //res.send(JSON.stringify(followers));
-            res.send(followers);
-        });
+ * GET /:userId/followers
+ */
+exports.showFollowers = (req, res, next) => {
+    theUrl = "http://mfra.me/api/users/" + req.params.userId + "/followers";
+
+    request({
+        url: theUrl,
+        json: true
+    }, function(error, response, body) {
+        if (!error && response.statusCode === 200) {
+            res.render('account/followers', {
+                title: 'Followers',
+                "followers": body
+            });
+        } else {
+            console.log(error);
+        }
     });
 };

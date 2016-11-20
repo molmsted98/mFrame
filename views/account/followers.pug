@@ -1,0 +1,9 @@
+extends ../layout
+
+block content
+    h1 Followers
+    hr
+    .row
+        each follow in followers
+            h1
+            a(href='/api/users/' + follow._id + '/posts')= '@' + follow.username
