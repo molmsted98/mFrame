@@ -101,13 +101,14 @@ html
             a-camera(user-height='2.5')
                 //a-cursor(fuse='true' color='teal' fuseTimeout='2000')
 
-            a-image(id='exitBtn' src='#exit' position='0 4.9 0' transparent='true' rotation='90 0 0' width='.5' height='.5')
+            //a-image(id='exitBtn' src='#exit' position='0 4.9 0' transparent='true' rotation='90 0 0' width='.5' height='.5')
 
-            script.
-                document.querySelector('#exitBtn').addEventListener('click', function()
-                {
-                    window.location = 'http://www.mfra.me';
-                })
+            //Unused exit script
+            //script.
+                //document.querySelector('#exitBtn').addEventListener('click', function()
+                //{
+                    //window.location = 'http://www.mfra.me';
+                //})
 
             //Floor
             a-image(src='#floortexture', position='0 1 0', rotation='90 0 0', width='3.99', height='3.99')
@@ -122,21 +123,22 @@ html
             //a-sky(color='#777777')
             script(src='/js/pictureHanger.js')
 
-            script.
-                var pics = document.getElementsByClassName("a")
+            //Unused script for expanding on mouse enter/ contracting on exit
+            //script.
+                //var pics = document.getElementsByClassName("a")
 
-                var expand = function()
-                {
+                //var expand = function()
+                //{
 
-                }
+                //}
 
-                var contract = function()
-                {
+                //var contract = function()
+                //{
 
-                }
+                //}
 
-                for (var i = 0; i < pics.length; i++)
-                {
-                    pics[i].addEventListener('mouseenter', expand)
-                    pics[i].addEventListener('mouseleave', contract)
-                }
+                //for (var i = 0; i < pics.length; i++)
+                //{
+                    //pics[i].addEventListener('mouseenter', expand)
+                    //pics[i].addEventListener('mouseleave', contract)
+                //}

@@ -2,18 +2,23 @@ extends layout
 
 block content
     h1 mFrame: A Virtual Reality Social Network
-    p.lead Find a room to explore.
-    form.form-horizontal(id='signup-form', method='POST')
-        input(type='text' name='search' placeholder='Search by username')
-        .row-lg-12.col-md-12
-            if users
-                each auser in users
-                    h1
-                    a(href='/api/users/' + auser._id + '/posts')= '@' + auser.username
-        br
-        hr
-        p.lead Check out some of the demo rooms
+    if user==null
+        p.lead(style = 'display:inline') New here? 
+        a(href='/signup' style = 'font-size:20px; display:inline') Create an account. 
+        p.lead() Or...
+    p.lead Check out some of the demo rooms
         .row-lg-12.col-md-12
             each buser in demoUsers
-                a(href='/api/users/' + buser._id + '/posts')= '@' + buser.username
+                a(href='/api/users/' + buser._id + '/posts' style = 'font-size:20px')= buser.username
                 h1
+        br
+        br
+        hr
+        p.lead Find a room to explore.
+        form.form-horizontal(id='signup-form', method='POST')
+            input(type='text' name='search' placeholder='Search by username')
+            .row-lg-12.col-md-12
+                if users
+                    each auser in users
+                        h1
+                        a(href='/api/users/' + auser._id + '/posts' style = 'font-size:20px')= auser.username
