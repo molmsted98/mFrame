@@ -6,4 +6,4 @@ block content
     .row
         each follow in followers
             h1
-            a(href='/api/users/' + follow._id + '/posts')= '@' + follow.username
+            a(href='/' + follow._id)= '@' + follow.username

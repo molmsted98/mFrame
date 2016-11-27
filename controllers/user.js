@@ -469,13 +469,12 @@ exports.postForgot = (req, res, next) => {
 };
 
 /***
- * GET /api/users/:userId/posts
+ * GET /:userId
  * Gets all images with userId.
  * Opens up the room, sends a ton of data.
  */
-exports.getPosts = (req, res, next) => {
+exports.showPosts = (req, res, next) => {
     const userId = req.params.userId;
-
     var following = false;
     var currentUrl = req.path;
 
@@ -650,7 +649,7 @@ exports.followUser = (req, res, next) => {
         req.flash('success', {
             msg: 'User was followed successfully.'
         });
-        return res.redirect('/api/users/' + req.params.userId + '/posts');
+        return res.redirect('/' + req.params.userId);
     });
 };
 
@@ -667,7 +666,7 @@ exports.unfollowUser = (req, res, next) => {
     req.flash('success', {
         msg: 'User was unfollowed successfully.'
     });
-    return res.redirect('/api/users/' + req.params.userId + '/posts');
+    return res.redirect('/' + req.params.userId);
 };
 
 /***

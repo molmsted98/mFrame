@@ -20,7 +20,7 @@
                         a(href='/' + user.id + '/following') Following
                 if user != null
                     li(class=(title == 'My Room') ? 'active' : undefined)
-                        a(href='/api/users/' + user.id + '/posts') My Room
+                        a(href='/' + user.id) My Room
             ul.nav.navbar-nav.navbar-right
                 if  user == null
                     li(class=(title == 'Login') ? 'active' : undefined)
@@ -38,7 +38,7 @@
                             i.caret
                         ul.dropdown-menu
                             li
-                                a(href='/api/users/' + user.id + '/posts') My Room
+                                a(href='/' + user.id) My Room
                             li.divider
                             li
                                 a(href='/account') Account

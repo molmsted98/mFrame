@@ -3,13 +3,13 @@ extends layout
 block content
     h1 mFrame: A Virtual Reality Social Network
     if user==null
-        p.lead(style = 'display:inline') New here? 
-        a(href='/signup' style = 'font-size:20px; display:inline') Create an account. 
+        p.lead(style = 'display:inline') New here?
+        a(href='/signup' style = 'font-size:20px; display:inline') Create an account.
         p.lead() Or...
     p.lead Check out some of the demo rooms
         .row-lg-12.col-md-12
             each buser in demoUsers
-                a(href='/api/users/' + buser._id + '/posts' style = 'font-size:20px')= buser.username
+                a(href='/' + buser._id style = 'font-size:20px')= buser.username
                 h1
         br
         br
@@ -21,4 +21,4 @@ block content
                 if users
                     each auser in users
                         h1
-                        a(href='/api/users/' + auser._id + '/posts' style = 'font-size:20px')= auser.username
+                        a(href='/' + auser._id style = 'font-size:20px')= auser.username
