@@ -549,7 +549,6 @@ exports.showPosts = (req, res, next) => {
                 });
             });
         } else {
-            console.log(userId)
             Style.findOne({
                 id: userId,
                 type: "Frame"

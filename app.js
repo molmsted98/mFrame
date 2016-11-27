@@ -96,7 +96,7 @@ app.use(passport.session());
 app.use(flash());
 
 app.use((req, res, next) => {
-    if (req.path === '/api/upload' || req.path === '/upload' || req.path === '/' || req.path === '/getPosts/:userId') {
+    if (req.path === '/api/upload' || req.path === '/upload' || req.path === '/' || req.path === '/:userId') {
         next();
     } else {
         lusca.csrf()(req, res, next);
@@ -150,7 +150,7 @@ app.get('/:userId/following', passportConfig.isAuthenticated, userController.sho
 app.get('/gifTest', demoController.gifTest);
 app.get('/moveTest', demoController.moveTest);
 app.post('/upload', passportConfig.isAuthenticated, upload.single('myFile'), uploadController.postUpload);
-app.put('/getPosts/:userId', passportConfig.isAuthenticated, userController.followUser);
+app.put('/:userId', passportConfig.isAuthenticated, userController.followUser);
 app.get('/:userId/followers', userController.showFollowers);
 app.get('/:userId/', userController.showPosts);
 
