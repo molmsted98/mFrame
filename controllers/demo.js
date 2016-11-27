@@ -3,14 +3,8 @@
  * Demo page.
  */
 exports.index = (req, res) => {
-    Post.find({
-        id: req.user._id
-    }).lean().exec((err, tags) => {
-        var filenames = tags;
-        res.render('vr/upload', {
-            "filenames": filenames,
-            "tags": tags
-        });
+    res.render('vr/demo', {
+        title: 'Demo'
     });
 };
 

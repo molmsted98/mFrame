@@ -30,7 +30,7 @@ const userSchema = new mongoose.Schema({
         location: String,
         website: String,
         picture: String,
-        tags: Array
+        tags: [String]
     },
 
     following: [String]
@@ -92,6 +92,24 @@ userSchema.methods.addUsername = function(username) {
 userSchema.methods.unfollowUser = function(userId) {
     const user = this;
     user.following.remove(userId);
+    user.save();
+}
+
+/**
+ * Helper method for adding a new tag.
+ */
+userSchema.methods.addTag = function(tag) {
+    const user = this;
+    user.tags.push(tag);
+    user.save();
+};
+
+/**
+ * Helper method for removing an existing tag.
+ */
+userSchema.methods.unfollowUser = function(tag) {
+    const user = this;
+    user.tags.remove(tag);
     user.save();
 }
 
