@@ -7,6 +7,7 @@ const Post = require('../models/Post');
 const Style = require('../models/Style');
 const fs = require("fs");
 const request = require("request");
+const path = require('path');
 
 /**
  * GET /login
@@ -477,7 +478,7 @@ exports.showPosts = (req, res, next) => {
     const userId = req.params.userId;
     var following = false;
     var currentUrl = req.path;
-
+    console.log("We're getting it")
     User.findOne({
         _id: userId
     }).lean().exec((err, targetUser) => {
@@ -708,5 +709,57 @@ exports.showFollowers = (req, res, next) => {
         } else {
             console.log(error);
         }
+    });
+};
+
+/***
+ * GET /api/:userId/post/:postId
+ * Returns a single post for the user
+ */
+exports.getPost = (req, res, next) => {
+    //Get the requested parameters
+    let userId = req.params.userId;
+    let postId = req.params.postId;
+
+    //Verify that the user exists in the database
+    User.findOne({
+        _id: userId
+    }).lean().exec((err, targetUser) => {
+        //Get all of the posts from the user
+        Post.find({
+            id: userId
+        }).lean().exec((err, posts) => {
+            //Extract all of the data about the posts
+            paths = [];
+            coords = [];
+            strCoords = [];
+            fileTypes = [];
+            for (var i = 0; i < posts.length; i++) {
+                var object = posts[i];
+                paths.push(
+                    object.fileName
+                );
+                coords.push(
+                    object.coordinates
+                );
+                fileTypes.push(
+                    object.fileType
+                );
+            }
+            //Convert the coordinates to a string. Might not be necessary now
+            for (var i = 0; i < posts.length; i++) {
+                strCoords[i] = coords[i][0] + ' ' + coords[i][1] + ' ' + coords[i][2]
+            }
+            //Verify that the user actually has a post for this id
+            if(postId > paths.length - 1)
+            {
+                res.sendFile(path.resolve(__dirname + '/../public/honda.jpg'));
+            }
+            else
+            {
+                let filename = paths[postId];
+                res.sendFile(path.resolve(__dirname + '/../public/uploads/' + filename));
+            }
+        });
     });
 };

@@ -152,12 +152,13 @@ app.get('/moveTest', demoController.moveTest);
 app.post('/upload', passportConfig.isAuthenticated, upload.single('myFile'), uploadController.postUpload);
 app.put('/:userId', passportConfig.isAuthenticated, userController.followUser);
 app.get('/:userId/followers', userController.showFollowers);
-app.get('/:userId/', userController.showPosts);
+//app.get('/:userId/', userController.showPosts);
 
 /**
  * API routes.
  */
 app.get('/api/users/:userId/posts', userController.showPosts);
+app.get('/api/users/:userId/post/:postId', userController.getPost);
 app.get('/api/users/:userId/following', apiController.getFollowing);
 app.get('/api/users/:userId/followers', apiController.getFollowers);
 app.post('/api/users/:userId/follow', passportConfig.isAuthenticated, userController.followUser);
