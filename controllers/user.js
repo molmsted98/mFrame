@@ -478,7 +478,6 @@ exports.showPosts = (req, res, next) => {
     const userId = req.params.userId;
     var following = false;
     var currentUrl = req.path;
-    console.log("We're getting it")
     User.findOne({
         _id: userId
     }).lean().exec((err, targetUser) => {
@@ -649,7 +648,7 @@ exports.followUser = (req, res, next) => {
         req.flash('success', {
             msg: 'User was followed successfully.'
         });
-        return res.redirect('/' + req.params.userId);
+        return res.redirect('/api/users/' + req.params.userId + '/posts');
     });
 };
 
@@ -666,7 +665,7 @@ exports.unfollowUser = (req, res, next) => {
     req.flash('success', {
         msg: 'User was unfollowed successfully.'
     });
-    return res.redirect('/' + req.params.userId);
+    return res.redirect('/api/users/' + req.params.userId + '/posts');
 };
 
 /***
@@ -674,7 +673,7 @@ exports.unfollowUser = (req, res, next) => {
  * Returns a list of the usernames of users' following.
  */
 exports.showFollowing = (req, res, next) => {
-    theUrl = "http://mfra.me/api/users/" + req.params.userId + "/following";
+    theUrl = "http://localhost:3000/api/users/" + req.params.userId + "/following";
 
     request({
         url: theUrl,
@@ -695,7 +694,7 @@ exports.showFollowing = (req, res, next) => {
  * GET /:userId/followers
  */
 exports.showFollowers = (req, res, next) => {
-    theUrl = "http://mfra.me/api/users/" + req.params.userId + "/followers";
+    theUrl = "http://localhost:3000/api/users/" + req.params.userId + "/followers";
 
     request({
         url: theUrl,

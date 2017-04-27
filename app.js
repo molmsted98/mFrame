@@ -151,6 +151,7 @@ app.get('/gifTest', demoController.gifTest);
 app.get('/moveTest', demoController.moveTest);
 app.post('/upload', passportConfig.isAuthenticated, upload.single('myFile'), uploadController.postUpload);
 app.put('/:userId', passportConfig.isAuthenticated, userController.followUser);
+app.get('/:userId/following', userController.showFollowing);
 app.get('/:userId/followers', userController.showFollowers);
 //app.get('/:userId/', userController.showPosts);
 
